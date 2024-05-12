@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Mo
 
 import './App.css';
 import ListeDesProjets from './composants/ListeDesProjets';
+import CreerProjet from './composants/CreerProjet';
 import HomePage from './composants/HomePage';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
        
         <Routes>
           <Route path="/projets" element={<ListeDesProjets />} /> {/* Modifiez cette ligne */}
+          <Route path="/creer-projet" element={<CreerProjet />} /> {/* Modifiez cette ligne */}
           <Route path="/" element={<HomePage />} />
         </Routes>
       </div>
