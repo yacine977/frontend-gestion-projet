@@ -5,12 +5,14 @@ import './App.css';
 import ListeDesProjets from './composants/ListeDesProjets';
 import CreerProjet from './composants/CreerProjet';
 import HomePage from './composants/HomePage';
+import NavBar from './composants/NavBar';
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <Router>
+      <NavBar />
       <div>
        
         <Routes>
