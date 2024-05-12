@@ -19,6 +19,7 @@ function ListeDesProjets() {
 
   return (
     <div>
+      <h1>Liste des projets</h1>
       {projets.map(projet => (
         <div key={projet.id}>
           <h2>{projet.nom}</h2>
