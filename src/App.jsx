@@ -6,6 +6,8 @@ import ListeDesProjets from './composants/ListeDesProjets';
 import CreerProjet from './composants/CreerProjet';
 import HomePage from './composants/HomePage';
 import NavBar from './composants/NavBar';
+import ModifierProjet from './composants/ModifierProjet';
+
 
 function App() {
   const [count, setCount] = useState(0);
@@ -16,9 +18,12 @@ function App() {
       <div>
        
         <Routes>
+          <Route path="/" element={<HomePage />} />
           <Route path="/projets" element={<ListeDesProjets />} /> {/* Modifiez cette ligne */}
           <Route path="/creer-projet" element={<CreerProjet />} /> {/* Modifiez cette ligne */}
-          <Route path="/" element={<HomePage />} />
+          <Route path="/modifier-projet/:id" element={<ModifierProjet />} /> {/* Modifiez cette ligne */}
+          
+          
         </Routes>
       </div>
     </Router>

@@ -1,18 +1,17 @@
-import { Link as RouterLink } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 function NavBar() {
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" style={{ flexGrow: 1 }}>
-          Mon Application
-        </Typography>
-        <Button color="inherit" component={RouterLink} to="/">Accueil</Button>
-        <Button color="inherit" component={RouterLink} to="/projets">Projets</Button>
-        <Button color="inherit" component={RouterLink} to="/creer-projet">Créer un projet</Button>
-      </Toolbar>
-    </AppBar>
+    <nav style={{ backgroundColor: '#282c34', padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <h1 style={{ color: 'white', flexGrow: 1 }}>
+        Mon Application
+      </h1>
+      <div>
+        <Link to="/" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Accueil</Link>
+        <Link to="/projets" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Projets</Link>
+        <Link to="/creer-projet" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Créer un projet</Link>
+      </div>
+    </nav>
   );
 }
 
