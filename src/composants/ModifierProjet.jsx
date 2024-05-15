@@ -1,5 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import '../styles/ProjetForm.css'
+
+
+
+
+
+
 
 function ModifierProjet() {
   const { id } = useParams();
@@ -56,7 +63,7 @@ function ModifierProjet() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='creer-projet'>
       <label>
         Nom:
         <input type="text" value={nom} onChange={(e) => setNom(e.target.value)}  />
