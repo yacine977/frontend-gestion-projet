@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import '../styles/CreerProjet.css';
 
 function CreerProjet() {
   const [nom, setNom] = useState('');
@@ -29,7 +30,7 @@ function CreerProjet() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='creer-projet'>
       <label>
         Nom:
         <input type="text" value={nom} onChange={(e) => setNom(e.target.value)} required />
