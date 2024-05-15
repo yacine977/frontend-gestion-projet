@@ -36,6 +36,19 @@ function ListeDesProjets() {
       alert('Erreur lors de la suppression du projet');
     }
   } 
+  const validerProjet = async (id) => {
+    const response = await fetch(`http://localhost:3000/projet/${id}/valider`, {
+      method: 'PUT',
+    });
+
+    if (response.ok) {
+      alert('Projet validé avec succès');
+      setProjets(projets.map(projet => projet.id === id ? { ...projet, est_valide: true } : projet));
+    } else {
+      alert('Erreur lors de la validation du projet');
+    }
+  }
+
 
  
 
@@ -47,6 +60,7 @@ function ListeDesProjets() {
           <div className="actions">
           <Link to={`/modifier-projet/${projet.id}`}className='modifier'>Modifier</Link>
           <button onClick={() => supprimerProjet(projet.id)}>Supprimer</button>
+          {!projet.est_valide && <button onClick={() => validerProjet(projet.id)}>Valider</button>}
           </div>
           <h2>{projet.nom}</h2>
           <p>{projet.description}</p>
