@@ -24,6 +24,12 @@ function CreerProjet() {
 
     if (response.ok) {
       alert('Projet créé avec succès');
+      setNom('');
+    setDescription('');
+    setDateDebut('');
+    setDateFinPrevu('');
+    setDateFinReel('');
+    setChefDeProjetId('');
     } else {
       alert('Erreur lors de la création du projet');
     }
