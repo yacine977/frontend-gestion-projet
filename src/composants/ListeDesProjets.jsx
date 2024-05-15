@@ -20,6 +20,22 @@ function ListeDesProjets() {
       });
   }, []);
 
+  const supprimerProjet = async (id) => {
+    if (!window.confirm('Voulez-vous vraiment supprimer ce projet ?')) {
+      return;
+    }
+    const response = await fetch(`http://localhost:3000/projet/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      alert('Projet supprimé avec succès');
+      setProjets(projets.filter(projet => projet.id !== id));
+    } else {
+      alert('Erreur lors de la suppression du projet');
+    }
+  } 
+
  
 
   return (
@@ -28,6 +44,7 @@ function ListeDesProjets() {
       {projets.map(projet => (
         <div key={projet.id}>
           <Link to={`/modifier-projet/${projet.id}`}>Modifier</Link>
+          <button onClick={() => supprimerProjet(projet.id)}>Supprimer</button>
           <h2>{projet.nom}</h2>
           <p>{projet.description}</p>
           
