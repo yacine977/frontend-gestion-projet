@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import '../styles/ListeDesProjets.css';
 
 
 function ListeDesProjets() {
@@ -39,12 +40,14 @@ function ListeDesProjets() {
  
 
   return (
-    <div>
+    <div className='liste-projets'>
       <h1>Liste des projets</h1>
       {projets.map(projet => (
-        <div key={projet.id}>
-          <Link to={`/modifier-projet/${projet.id}`}>Modifier</Link>
+        <div key={projet.id} className='projet'>
+          <div className="actions">
+          <Link to={`/modifier-projet/${projet.id}`}className='modifier'>Modifier</Link>
           <button onClick={() => supprimerProjet(projet.id)}>Supprimer</button>
+          </div>
           <h2>{projet.nom}</h2>
           <p>{projet.description}</p>
           
