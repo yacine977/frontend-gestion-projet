@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import '../styles/CreerTache.css';
 
 function CreerTache() {
   const [description, setDescription] = useState('');
@@ -37,7 +38,7 @@ function CreerTache() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='creer-tache'>
       <label>
         Description:
         <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} required />
@@ -66,7 +67,7 @@ function CreerTache() {
         ID du projet:
         <input type="number" value={projetId} onChange={(e) => setProjetId(e.target.value)} required />
       </label>
-      <button type="submit">Créer une tâche</button>
+      <button type="submit" className='submit-button'>Créer une tâche</button>
     </form>
   );
 }
