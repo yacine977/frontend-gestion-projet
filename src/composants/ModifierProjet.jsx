@@ -57,6 +57,7 @@ function ModifierProjet() {
 
     if (response.ok) {
       alert('Projet modifié avec succès');
+      
     } else {
       alert('Erreur lors de la modification du projet');
     }
