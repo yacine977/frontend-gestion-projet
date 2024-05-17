@@ -9,6 +9,8 @@ import NavBar from './composants/NavBar';
 import ModifierProjet from './composants/ModifierProjet';
 import ListeDesTaches from './composants/ListeDesTaches';
 import CreerTache from './composants/CreerTache';
+import ModifierTache from './composants/ModifierTache';
+
 
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
           <Route path="/modifier-projet/:id" element={<ModifierProjet />} /> {/* Modifiez cette ligne */}
           <Route path="/taches" element={<ListeDesTaches />} /> {/* Modifiez cette ligne */}
           <Route path="/creer-tache" element={<CreerTache />} /> {/* Modifiez cette ligne */}
+          <Route path="/modifier-tache/:id" element={<ModifierTache />} /> {/* Modifiez cette ligne */}
+          
           
           
         </Routes>

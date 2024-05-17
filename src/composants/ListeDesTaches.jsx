@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/ListeDesTaches.css';
+import { Link } from 'react-router-dom';
+
 
 function ListeDesTaches() {
   const [taches, setTaches] = useState([]);
@@ -24,6 +26,8 @@ function ListeDesTaches() {
           <p>Date de fin prévue : {tache.dateFinPrevu}</p>
           <p>Date de fin réelle : {tache.dateFinReel}</p>
           <p>ID du projet : {tache.projetId}</p>
+          <Link to={`/modifier-tache/${tache.id}`} className="button">Modifier</Link>
+         
         </div>
       ))}
     </div>

@@ -49,7 +49,7 @@ function CreerTache() {
       </label>
       <label>
         Statut:
-        <input type="text" value={statut} onChange={(e) => setStatut(e.target.value)} required />
+        <input type="text" value={statut} onChange={(e) => setStatut(e.target.value)}  />
       </label>
       <label>
         Date de début:
