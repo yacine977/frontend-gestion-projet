@@ -73,7 +73,7 @@ function ModifierTache() {
 
       if (response.ok) {
   alert('Tâche modifiée avec succès');
-  history.push('/'); // Redirige vers la page d'accueil
+  history('http://localhost:5173/taches'); // Redirige vers la page d'accueil
 } else {
   if (response.headers.get('content-type').includes('application/json')) {
     const errorData = await response.json();
@@ -114,7 +114,7 @@ function ModifierTache() {
       </label>
       <label>
         Date de fin réelle:
-        <input type="date" value={dateFinReel} onChange={(e) => setDateFinReel(e.target.value)} required />
+        <input type="date" value={dateFinReel} onChange={(e) => setDateFinReel(e.target.value)}  />
       </label>
       <label>
         ID du projet:

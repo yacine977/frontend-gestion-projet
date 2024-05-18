@@ -49,7 +49,7 @@ function CreerTache() {
       </label>
       <label>
         Statut:
-        <input type="text" value={statut} onChange={(e) => setStatut(e.target.value)}  />
+        <input type="text" value={statut} onChange={(e) => setStatut(e.target.value)} required />
       </label>
       <label>
         Date de début:
@@ -61,7 +61,7 @@ function CreerTache() {
       </label>
       <label>
         Date de fin réelle:
-        <input type="date" value={dateFinReel} onChange={(e) => setDateFinReel(e.target.value)} />
+        <input type="date" value={dateFinReel} onChange={(e) => setDateFinReel(e.target.value)}  />
       </label>
       <label>
         ID du projet:
