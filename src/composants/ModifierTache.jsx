@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+
 import '../styles/CreerTache.css';
 
 function ModifierTache() {
   const { id } = useParams();
-  const history = useHistory();
+  const history = useNavigate();
   const [description, setDescription] = useState('');
   const [priorite, setPriorite] = useState(0);
   const [statut, setStatut] = useState('');

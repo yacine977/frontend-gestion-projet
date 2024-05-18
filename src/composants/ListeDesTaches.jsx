@@ -13,6 +13,22 @@ function ListeDesTaches() {
       .catch(error => console.error('Erreur:', error));
   }, []);
 
+ const deleteTache = async (id) => {
+  const confirm = window.confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?');
+  if (confirm) {
+    const response = await fetch(`http://localhost:3000/tache/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      alert('Tâche supprimée avec succès');
+      setTaches(taches.filter((tache) => tache.id !== id));
+    } else {
+      alert('Erreur lors de la suppression de la tâche');
+    }
+  }
+}
+
   return (
     <div className="container">
       <h1 className="title">Tâches</h1>
@@ -27,6 +43,7 @@ function ListeDesTaches() {
           <p>Date de fin réelle : {tache.dateFinReel}</p>
           <p>ID du projet : {tache.projetId}</p>
           <Link to={`/modifier-tache/${tache.id}`} className="button">Modifier</Link>
+          <button onClick={() => deleteTache(tache.id)} className="button">Supprimer</button>
          
         </div>
       ))}
