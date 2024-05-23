@@ -38,9 +38,9 @@ function ListeDesTaches() {
           <p>{tache.description}</p>
           <p>Priorité : {tache.priorite}</p>
           <p>Statut : {tache.statut}</p>
-          <p>Date de début : {tache.dateDebut}</p>
-          <p>Date de fin prévue : {tache.dateFinPrevu}</p>
-          <p>Date de fin réelle : {tache.dateFinReel}</p>
+        <p>Date de début : {new Date(tache.dateDebut).toLocaleDateString('fr-FR')}</p>
+<p>Date de fin prévue : {new Date(tache.dateFinPrevu).toLocaleDateString('fr-FR')}</p>
+<p>Date de fin réelle : {new Date(tache.dateFinReel).toLocaleDateString('fr-FR')}</p>
           <p>ID du projet : {tache.projetId}</p>
           <Link to={`/modifier-tache/${tache.id}`} className="button">Modifier</Link>
           <button onClick={() => deleteTache(tache.id)} className="button">Supprimer</button>
