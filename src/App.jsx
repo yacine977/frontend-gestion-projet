@@ -11,6 +11,7 @@ import ListeDesTaches from './composants/ListeDesTaches';
 import CreerTache from './composants/CreerTache';
 import ModifierTache from './composants/ModifierTache';
 import CreerDocument from './composants/CreerDocument';
+import ListeDocuments from './composants/ListeDocuments';
 
 
 
@@ -31,7 +32,8 @@ function App() {
           <Route path="/taches" element={<ListeDesTaches />} /> 
           <Route path="/creer-tache" element={<CreerTache />} /> 
           <Route path="/modifier-tache/:id" element={<ModifierTache />} />
-          <Route path="/creer-document" element={<CreerDocument />} /> 
+          <Route path="/creer-document" element={<CreerDocument />} />
+          <Route path="/documents" element={<ListeDocuments />} /> 
           
           
           
