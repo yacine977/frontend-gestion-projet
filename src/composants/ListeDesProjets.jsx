@@ -67,7 +67,7 @@ function ListeDesProjets() {
           
           <p>Date de début : {new Date(projet.dateDebut).toLocaleDateString()}</p>
           <p>Date de fin prévue : {new Date(projet.dateFinPrevu).toLocaleDateString()}</p>
-          <p>Date de fin réelle : {projet.dateFinReel ? new Date(projet.dateFinReel).toLocaleDateString() : 'N/A'}</p>
+          <p>Date de fin réelle : {projet.dateFinReel ? new Date(projet.dateFinReel).toLocaleDateString() : 'Non défini'}</p>
           <p>Chef de projet ID : {projet.chefDeProjetId}</p>
           <p>Est validé : {projet.est_valide ? 'Oui' : 'Non'}</p>
           
