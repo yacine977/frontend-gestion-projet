@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/ListeDocuments.css';
+import { Link } from 'react-router-dom';
 
 function ListeDocuments() {
   const [documents, setDocuments] = useState([]);
@@ -22,6 +23,10 @@ const supprimerDocument = async (id) => {
   }
 };
 
+
+
+
+
   return (
     <div className="documents-container">
       <h1 className="documents-title">Liste des documents</h1>
@@ -32,6 +37,8 @@ const supprimerDocument = async (id) => {
           <p className="document-info">Chemin d'accès: {doc.cheminAcces}</p>
           <p className="document-info">ID de l'utilisateur: {doc.utilisateurId}</p>
           <button onClick={() => supprimerDocument(doc.id)} className="document-delete-button">Supprimer</button>
+          <Link to={`/UpdateDocumentForm/${doc.id}`} className="document-update-button">Modifier</Link>
+         
         </div>
       ))}
     </div>
