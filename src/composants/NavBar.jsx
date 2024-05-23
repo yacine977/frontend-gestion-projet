@@ -12,6 +12,7 @@ function NavBar() {
         <Link to="/creer-projet" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Créer un projet</Link>
         <Link to="/taches" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Tâches</Link>
         <Link to="/creer-tache" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Créer une tâche</Link>
+        <Link to="/creer-document" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Créer un document</Link>
       </div>
     </nav>
   );
