@@ -13,6 +13,7 @@ import ModifierTache from './composants/ModifierTache';
 import CreerDocument from './composants/CreerDocument';
 import ListeDocuments from './composants/ListeDocuments';
 import UpdateDocumentForm from './composants/UpdateDocumentForm';
+import DetailProjet from './composants/DetailProjet';
 
 
 
@@ -37,6 +38,8 @@ function App() {
           <Route path="/creer-document" element={<CreerDocument />} />
           <Route path="/documents" element={<ListeDocuments />} />
           <Route path="/UpdateDocumentForm/:id" element={<UpdateDocumentForm />} />
+          <Route path="/detail-projet/:id" element={<DetailProjet />} />
+          
           
           
           
