@@ -14,6 +14,8 @@ import CreerDocument from './composants/CreerDocument';
 import ListeDocuments from './composants/ListeDocuments';
 import UpdateDocumentForm from './composants/UpdateDocumentForm';
 import DetailProjet from './composants/DetailProjet';
+import TachesProjet from './composants/TachesProjet';
+
 
 
 
@@ -39,6 +41,8 @@ function App() {
           <Route path="/documents" element={<ListeDocuments />} />
           <Route path="/UpdateDocumentForm/:id" element={<UpdateDocumentForm />} />
           <Route path="/detail-projet/:id" element={<DetailProjet />} />
+          <Route path="/taches-projet/:projetId" element={<TachesProjet />} />
+          
           
           
           

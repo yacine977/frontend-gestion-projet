@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 function DetailProjet() {
   const [projet, setProjet] = useState(null);
@@ -36,6 +36,12 @@ function DetailProjet() {
       <p>Date de fin réelle : {projet.dateFinReel ? new Date(projet.dateFinReel).toLocaleDateString() : 'Non défini'}</p>
       <p>Chef de projet ID : {projet.chefDeProjetId}</p>
       <p>Est validé : {projet.est_valide ? 'Oui' : 'Non'}</p>
+      <Link to={`/taches-projet/${projet.id}`} className='button'>
+        Voir les tâches de ce projet
+      </Link>
+      
+      
+
     </div>
   );
 }

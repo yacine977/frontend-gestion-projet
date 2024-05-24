@@ -61,6 +61,7 @@ function ListeDesProjets() {
           <Link to={`/modifier-projet/${projet.id}`}className='modifier'>Modifier</Link>
           <button onClick={() => supprimerProjet(projet.id)}>Supprimer</button>
           {!projet.est_valide && <button onClick={() => validerProjet(projet.id)}>Valider</button>}
+          <Link to={`/detail-projet/${projet.id}`} className='detail'>Consulter</Link>
           </div>
           <h2>{projet.nom}</h2>
           <p>{projet.description}</p>
