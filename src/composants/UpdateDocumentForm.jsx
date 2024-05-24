@@ -23,8 +23,36 @@ function UpdateDocumentForm() {
     fetchData();
   }, [id]);
 
+  const valider = () => {
+    if (nom.trim() === '') {
+      alert('Le nom ne peut pas être vide');
+      return false;
+    }
+
+    if (type.trim() === '') {
+      alert('Veuillez sélectionner un type de document');
+      return false;
+    }
+
+    if (cheminAcces.trim() === '') {
+      alert('Le chemin d\'accès ne peut pas être vide');
+      return false;
+    }
+
+    if (isNaN(utilisateurId)) {
+      alert('L\'ID de l\'utilisateur doit être un nombre');
+      return false;
+    }
+
+    return true;
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!valider()) {
+      return;
+    }
 
     const data = {
       nom: nom || undefined,
@@ -58,10 +86,26 @@ function UpdateDocumentForm() {
         Nom:
         <input type="text" value={nom} onChange={(e) => setNom(e.target.value)} />
       </label>
-      <label>
-        Type:
-        <input type="text" value={type} onChange={(e) => setType(e.target.value)} />
-      </label>
+      <label className="form-label">
+  Type:
+  <select value={type} onChange={e => setType(e.target.value)} required className="form-input">
+    <option value="">Sélectionnez un type</option>
+    <option value=".txt">.txt</option>
+    <option value=".pdf">.pdf</option>
+    <option value=".doc">.doc</option>
+    <option value=".docx">.docx</option>
+    <option value=".xls">.xls</option>
+    <option value=".xlsx">.xlsx</option>
+    <option value=".ppt">.ppt</option>
+    <option value=".pptx">.pptx</option>
+    <option value=".jpg">.jpg</option>
+    <option value=".png">.png</option>
+    <option value=".gif">.gif</option>
+    <option value=".csv">.csv</option>
+    <option value=".xml">.xml</option>
+    <option value=".json">.json</option>
+  </select>
+</label>
       <label>
         Chemin d'accès:
         <input type="text" value={cheminAcces} onChange={(e) => setCheminAcces(e.target.value)} />
