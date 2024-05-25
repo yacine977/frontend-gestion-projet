@@ -6,6 +6,7 @@ function CreerDocument() {
   const [type, setType] = useState('');
   const [cheminAcces, setCheminAcces] = useState('');
   const [utilisateurId, setUtilisateurId] = useState('');
+  const [projetId, setProjetId] = useState('');
 
   const valider = () => {
     if (nom.trim() === '') {
@@ -28,6 +29,11 @@ function CreerDocument() {
       return false;
     }
 
+if (isNaN(projetId)) {
+      alert('L\'ID du projet doit être un nombre');
+      return false;
+    }
+
     return true;
   };
 
@@ -38,7 +44,7 @@ function CreerDocument() {
       return;
     }
 
-    const doc = { nom, type, cheminAcces, utilisateurId };
+    const doc = { nom, type, cheminAcces, utilisateurId, projetId};
 
     const response = await fetch('http://localhost:3000/document', {
       method: 'POST',
@@ -54,6 +60,7 @@ function CreerDocument() {
         setType('');
         setCheminAcces('');
         setUtilisateurId('');
+        setProjetId('');
         
       } else {
         alert('Erreur lors de la création du document');
@@ -95,6 +102,10 @@ function CreerDocument() {
           ID de l'utilisateur:
           <input type="text" value={utilisateurId} onChange={e => setUtilisateurId(e.target.value)} required className="form-input" />
         </label>
+        <label className="form-label">
+          ID du projet:
+          <input type="text" value={projetId} onChange={e => setProjetId(e.target.value)} required className="form-input" />
+          </label>
         <input type="submit" value="Créer" className="form-submit" />
       </form>
     </div>
