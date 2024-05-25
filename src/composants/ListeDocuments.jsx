@@ -36,6 +36,7 @@ const supprimerDocument = async (id) => {
           <p className="document-info">Type: {doc.type}</p>
           <p className="document-info">Chemin d'accès: {doc.cheminAcces}</p>
           <p className="document-info">ID de l'utilisateur: {doc.utilisateurId}</p>
+          <p className="document-info">ID du projet: {doc.projetId}</p>
           <button onClick={() => supprimerDocument(doc.id)} className="document-delete-button">Supprimer</button>
           <Link to={`/UpdateDocumentForm/${doc.id}`} className="document-update-button">Modifier</Link>
          
