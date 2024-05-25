@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import '../styles/CreerTache.css';
+import { useParams } from 'react-router-dom';
 
 function CreerTache() {
   const [description, setDescription] = useState('');
@@ -8,7 +9,8 @@ function CreerTache() {
   const [dateDebut, setDateDebut] = useState('');
   const [dateFinPrevu, setDateFinPrevu] = useState('');
   const [dateFinReel, setDateFinReel] = useState('');
-  const [projetId, setProjetId] = useState(0);
+  const { projetId: initialProjetId } = useParams();
+const [projetId, setProjetId] = useState(initialProjetId || 0);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
