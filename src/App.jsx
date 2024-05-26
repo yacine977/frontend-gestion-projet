@@ -35,14 +35,13 @@ function App() {
           <Route path="/creer-projet" element={<CreerProjet />} /> 
           <Route path="/modifier-projet/:id" element={<ModifierProjet />} /> 
           <Route path="/taches" element={<ListeDesTaches />} /> 
-          
           <Route path="/modifier-tache/:id" element={<ModifierTache />} />
-          <Route path="/creer-document" element={<CreerDocument />} />
           <Route path="/documents" element={<ListeDocuments />} />
           <Route path="/UpdateDocumentForm/:id" element={<UpdateDocumentForm />} />
           <Route path="/detail-projet/:id" element={<DetailProjet />} />
           <Route path="/taches-projet/:projetId" element={<TachesProjet />} />
           <Route path="/creer-tache/:projetId?" element={<CreerTache />} />
+          <Route path="/creer-document/:projetId?" element={<CreerDocument />} />
           
           
           

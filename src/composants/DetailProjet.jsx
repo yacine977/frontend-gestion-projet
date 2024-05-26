@@ -39,10 +39,13 @@ function DetailProjet() {
       <Link to={`/taches-projet/${projet.id}`} className='button'>
         Voir les tâches de ce projet
       </Link>
-      
       <br/>
       <Link to={`/creer-tache/${projet.id}`} className='button'>
   Créer une tâche pour ce projet
+</Link>
+<br/>
+<Link to={`/creer-document/${projet.id}`} className='button'>
+  Créer un document pour ce projet
 </Link>
       
       

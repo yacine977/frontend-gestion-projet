@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import '../styles/CreerDocument.css';
+import { useParams } from 'react-router-dom';
 
 function CreerDocument() {
   const [nom, setNom] = useState('');
   const [type, setType] = useState('');
   const [cheminAcces, setCheminAcces] = useState('');
   const [utilisateurId, setUtilisateurId] = useState('');
-  const [projetId, setProjetId] = useState('');
+  const { projetId: initialProjetId } = useParams();
+  const [projetId, setProjetId] = useState(initialProjetId || 0);
 
   const valider = () => {
     if (nom.trim() === '') {
