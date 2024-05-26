@@ -7,6 +7,7 @@ function UpdateDocumentForm() {
   const [type, setType] = useState('');
   const [cheminAcces, setCheminAcces] = useState('');
   const [utilisateurId, setUtilisateurId] = useState('');
+  const [projetId, setProjetId] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,6 +18,7 @@ function UpdateDocumentForm() {
         setType(data.type);
         setCheminAcces(data.cheminAcces);
         setUtilisateurId(data.utilisateurId);
+        setProjetId(data.projetId);
       }
     };
 
@@ -44,6 +46,11 @@ function UpdateDocumentForm() {
       return false;
     }
 
+  if (isNaN(projetId)) {
+      alert('L\'ID du projet doit être un nombre');
+      return false;
+    } 
+
     return true;
   };
 
@@ -59,6 +66,7 @@ function UpdateDocumentForm() {
       type: type || undefined,
       cheminAcces: cheminAcces || undefined,
       utilisateurId: utilisateurId || undefined,
+      projetId: projetId || undefined,
     };
 
     const response = await fetch(`http://localhost:3000/document/${id}`, {
@@ -76,6 +84,7 @@ function UpdateDocumentForm() {
       setType('');
       setCheminAcces('');
       setUtilisateurId('');
+      setProjetId('');
       alert('Document mis à jour avec succès');
     }
   };
@@ -113,6 +122,10 @@ function UpdateDocumentForm() {
       <label>
         ID de l'utilisateur:
         <input type="text" value={utilisateurId} onChange={(e) => setUtilisateurId(e.target.value)} />
+      </label>
+      <label>
+        ID du projet:
+        <input type="text" value={projetId} onChange={(e) => setProjetId(e.target.value)} />
       </label>
       <button type="submit">Mettre à jour</button>
     </form>
