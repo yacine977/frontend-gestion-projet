@@ -30,8 +30,8 @@ function CreerDocument() {
       return false;
     }
 
-    if (isNaN(projetId)) {
-      alert("L'ID du projet doit être un nombre");
+    if (isNaN(projetId) || projetId <= 0) {
+      alert("L'ID du projet doit être un nombre supérieur à 0");
       return false;
     }
 
