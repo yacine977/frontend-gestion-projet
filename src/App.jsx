@@ -15,6 +15,7 @@ import ListeDocuments from './composants/ListeDocuments';
 import UpdateDocumentForm from './composants/UpdateDocumentForm';
 import DetailProjet from './composants/DetailProjet';
 import TachesProjet from './composants/TachesProjet';
+import ProjectDocuments from './composants/ProjectDocuments';
 
 
 
@@ -42,6 +43,7 @@ function App() {
           <Route path="/taches-projet/:projetId" element={<TachesProjet />} />
           <Route path="/creer-tache/:projetId?" element={<CreerTache />} />
           <Route path="/creer-document/:projetId?" element={<CreerDocument />} />
+          <Route path="/documents-projet/:projetId" element={<ProjectDocuments />} />
           
           
           
