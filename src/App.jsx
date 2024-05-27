@@ -17,6 +17,7 @@ import DetailProjet from "./composants/DetailProjet";
 import TachesProjet from "./composants/TachesProjet";
 import ProjectDocuments from "./composants/ProjectDocuments";
 import ListeReunions from "./composants/ListeReunions";
+import CreerReunion from "./composants/CreerReunion";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -49,6 +50,7 @@ function App() {
             element={<ProjectDocuments />}
           />
           <Route path="/reunions" element={<ListeReunions />} />
+          <Route path="/creer-reunion" element={<CreerReunion />} />
         </Routes>
       </div>
     </Router>
