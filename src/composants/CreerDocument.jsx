@@ -25,8 +25,8 @@ function CreerDocument() {
       return false;
     }
 
-    if (isNaN(utilisateurId)) {
-      alert("L'ID de l'utilisateur doit être un nombre");
+    if (isNaN(utilisateurId) || utilisateurId <= 0) {
+      alert("L'ID de l'utilisateur doit être un nombre supérieur à 0");
       return false;
     }
 
