@@ -1,6 +1,9 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 function NavBar() {
+  const user = JSON.parse(localStorage.getItem('user'));
+
   return (
     <nav style={{ backgroundColor: '#282c34', padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
       <h1 style={{ color: 'white', flexGrow: 1 }}>
@@ -16,6 +19,20 @@ function NavBar() {
         <Link to="/documents" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Documents</Link>
         <Link to="/reunions" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Réunions</Link>
         <Link to="/creer-reunion" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Créer une réunion</Link>
+        {user && (
+          <>
+            <div style={{ color: 'white', marginLeft: '10px' }}>
+              Connecté en tant que : <strong>{user.email}</strong>
+            </div>
+            <Link to="/deconnexion" style={{ color: '#FF4500', textDecoration: 'none', margin: '0 10px', fontSize: '20px' }}>Déconnexion</Link>
+          </>
+        )}
+        {!user && (
+          <>
+            <Link to="/inscription" style={{ color: '#FFD700', textDecoration: 'none', margin: '0 10px', fontSize: '20px' }}>Inscription</Link>
+            <Link to="/connexion" style={{ color: '#FFD700', textDecoration: 'none', margin: '0 10px', fontSize: '20px' }}>Connexion</Link>
+          </>
+        )}
       </div>
     </nav>
   );

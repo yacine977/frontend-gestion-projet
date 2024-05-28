@@ -6,21 +6,32 @@ import '../styles/ListeDesProjets.css';
 
 function ListeDesProjets() {
   const [projets, setProjets] = useState([]);
+  const user = JSON.parse(localStorage.getItem('user'));
+  console.log(user);
+  const role = localStorage.getItem('role');
+
+  // Si l'utilisateur n'est pas un PDG, ne pas afficher la liste des projets
+  if (role !== 'PDG') {
+    return null;
+  }
 
   useEffect(() => {
-    fetch('http://localhost:3000/projet')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Erreur HTTP: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => setProjets(data))
-      .catch(error => {
-        console.error('Une erreur est survenue lors de la récupération des projets : ', error);
-      });
-  }, []);
-
+  fetch('http://localhost:3000/projet', {
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    }
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Erreur HTTP: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => setProjets(data))
+    .catch(error => {
+      console.error('Une erreur est survenue lors de la récupération des projets : ', error);
+    });
+}, []);
   const supprimerProjet = async (id) => {
     if (!window.confirm('Voulez-vous vraiment supprimer ce projet ?')) {
       return;

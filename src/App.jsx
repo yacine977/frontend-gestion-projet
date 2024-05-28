@@ -20,6 +20,9 @@ import ListeReunions from './composants/ListeReunions';
 import CreerReunion from './composants/CreerReunion';
 import ModifierReunion from './composants/ModifierReunion';
 import Inscription from './composants/Inscription';
+import Connexion from './composants/Connexion';
+import Deconnexion from './composants/Deconnexion';
+
 
 
 
@@ -53,6 +56,10 @@ function App() {
           <Route path="/creer-reunion" element={<CreerReunion />} />
           <Route path="/modifier-reunion/:id" element={<ModifierReunion />} />
           <Route path="/inscription" element={<Inscription />} />
+          <Route path="/connexion" element={<Connexion />} />
+          <Route path="/deconnexion" element={<Deconnexion />} />
+          
+
           
           
           
