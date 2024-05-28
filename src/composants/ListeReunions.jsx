@@ -38,6 +38,7 @@ function ListeReunions() {
           <p>Date et heure : {reunion.dateTime}</p>
           <p>ID du projet : {reunion.projetId}</p>
           <p>ID du créateur : {reunion.createurId}</p>
+          <a href={`/modifier-reunion/${reunion.id}`}>Modifier</a>
           <button onClick={() => supprimerReunion(reunion.id)}>Supprimer</button>
         </div>
       ))}
