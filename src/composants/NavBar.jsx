@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 function NavBar() {
   const user = JSON.parse(localStorage.getItem('user'));
+  const role = localStorage.getItem('role');
 
   return (
     <nav style={{ backgroundColor: '#282c34', padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -11,8 +12,12 @@ function NavBar() {
       </h1>
       <div>
         <Link to="/" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Accueil</Link>
+        {role === 'PDG' && (
+          <>
         <Link to="/projets" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Projets</Link>
         <Link to="/creer-projet" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Créer un projet</Link>
+        </>
+        )}
         <Link to="/taches" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Tâches</Link>
         <Link to="/creer-tache" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Créer une tâche</Link>
         <Link to="/creer-document" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Créer un document</Link>
