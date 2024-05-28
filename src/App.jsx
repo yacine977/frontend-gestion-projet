@@ -19,6 +19,7 @@ import ProjectDocuments from './composants/ProjectDocuments';
 import ListeReunions from './composants/ListeReunions';
 import CreerReunion from './composants/CreerReunion';
 import ModifierReunion from './composants/ModifierReunion';
+import Inscription from './composants/Inscription';
 
 
 
@@ -51,6 +52,7 @@ function App() {
           <Route path="/reunions" element={<ListeReunions />} />
           <Route path="/creer-reunion" element={<CreerReunion />} />
           <Route path="/modifier-reunion/:id" element={<ModifierReunion />} />
+          <Route path="/inscription" element={<Inscription />} />
           
           
           
