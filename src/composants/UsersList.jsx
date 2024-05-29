@@ -29,7 +29,19 @@ function UserList() {
     const data = await response.json();
     alert(data.message);
   };
-  
+
+  const assignUsersToProject = async (projectId, uid) => {
+    const response = await fetch(`http://localhost:3000/projet/${projectId}/assignerFirebase`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
+      },
+      body: JSON.stringify({ utilisateurs: [uid] }),
+    });
+    const data = await response.json();
+    alert(data.message);
+  };
 
   return (
     <div>
@@ -40,7 +52,6 @@ function UserList() {
           <p>Email: {user.email}</p>
           <p>UID: {user.uid}</p>
           <select onChange={(e) => setRole(user.uid, e.target.value)}>
-            
             <option value=""> Definir un role </option>
             <option value="PDG">PDG</option>
             <option value="ChefDeProjet">Chef de projet</option>
@@ -48,7 +59,12 @@ function UserList() {
             <option value="AdministrateurInfrastructure">Administrateur d'infrastructure</option>
           </select>
           <button onClick={() => getRole(user.uid).then(role => alert(`Role: ${role}`))}>Voir le rôle</button>
-          {/* Affichez d'autres informations sur l'utilisateur si nécessaire */}
+          <button onClick={() => {
+            const projectId = prompt("Entrez l'ID du projet");
+            if (projectId) {
+              assignUsersToProject(projectId, user.uid);
+            }
+          }}>Assigner au projet</button>
         </div>
       ))}
     </div>
