@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 function ModifierReunion() {
   const { id } = useParams();
-  const [sujet, setSujet] = useState('');
-  const [dateTime, setDateTime] = useState('');
-  const [projetId, setProjetId] = useState('');
-  const [createurId, setCreateurId] = useState('');
+  const [sujet, setSujet] = useState("");
+  const [dateTime, setDateTime] = useState("");
+  const [projetId, setProjetId] = useState("");
+  const [createurId, setCreateurId] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,7 +18,7 @@ function ModifierReunion() {
         setProjetId(data.projetId);
         setCreateurId(data.createurId);
       } else {
-        throw new Error('Erreur lors du chargement des données de la réunion');
+        throw new Error("Erreur lors du chargement des données de la réunion");
       }
     };
 
@@ -39,31 +39,28 @@ function ModifierReunion() {
     event.preventDefault();
 
     const reunion = {
-        sujet: sujet,
-        dateTime: dateTime,
-        projetId: projetId,
-        createurId: createurId
-      };
-
-    
+      sujet: sujet,
+      dateTime: dateTime,
+      projetId: projetId,
+      createurId: createurId,
+    };
 
     const response = await fetch(`http://localhost:3000/reunion/${id}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(reunion),
     });
 
     if (response.ok) {
-      alert('Réunion modifiée avec succès');
-      setSujet('');
-        setDateTime('');
-        setProjetId('');
-        setCreateurId('');
-        
+      alert("Réunion modifiée avec succès");
+      setSujet("");
+      setDateTime("");
+      setProjetId("");
+      setCreateurId("");
     } else {
-      alert('Erreur lors de la modification de la réunion');
+      alert("Erreur lors de la modification de la réunion");
     }
   };
 
@@ -71,19 +68,35 @@ function ModifierReunion() {
     <form onSubmit={handleSubmit}>
       <label>
         Sujet:
-        <input type="text" value={sujet} onChange={(e) => setSujet(e.target.value)} />
+        <input
+          type="text"
+          value={sujet}
+          onChange={(e) => setSujet(e.target.value)}
+        />
       </label>
       <label>
         Date et heure:
-        <input type="datetime-local" value={dateTime} onChange={(e) => setDateTime(e.target.value)} />
+        <input
+          type="datetime-local"
+          value={dateTime}
+          onChange={(e) => setDateTime(e.target.value)}
+        />
       </label>
       <label>
         ID du projet:
-        <input type="text" value={projetId} onChange={(e) => setProjetId(e.target.value)} />
+        <input
+          type="text"
+          value={projetId}
+          onChange={(e) => setProjetId(e.target.value)}
+        />
       </label>
       <label>
         ID du créateur:
-        <input type="text" value={createurId} onChange={(e) => setCreateurId(e.target.value)} />
+        <input
+          type="text"
+          value={createurId}
+          onChange={(e) => setCreateurId(e.target.value)}
+        />
       </label>
       <button type="submit">Modifier la réunion</button>
     </form>
