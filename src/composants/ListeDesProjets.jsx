@@ -49,21 +49,24 @@ function ListeDesProjets() {
     }
   };
   const validerProjet = async (id) => {
-    const response = await fetch(`http://localhost:3000/projet/${id}/valider`, {
-      method: "PUT",
-    });
+  const response = await fetch(`http://localhost:3000/projet/${id}/valider`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
-    if (response.ok) {
-      alert("Projet validé avec succès");
-      setProjets(
-        projets.map((projet) =>
-          projet.id === id ? { ...projet, est_valide: true } : projet
-        )
-      );
-    } else {
-      alert("Erreur lors de la validation du projet");
-    }
-  };
+  if (response.ok) {
+    alert("Projet validé avec succès");
+    setProjets(
+      projets.map((projet) =>
+        projet.id === id ? { ...projet, est_valide: true } : projet
+      )
+    );
+  } else {
+    alert("Erreur lors de la validation du projet");
+  }
+};
 
   return (
     <div className="liste-projets">
