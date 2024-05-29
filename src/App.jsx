@@ -22,6 +22,7 @@ import ModifierReunion from './composants/ModifierReunion';
 import Inscription from './composants/Inscription';
 import Connexion from './composants/Connexion';
 import Deconnexion from './composants/Deconnexion';
+import UserList from './composants/UsersList';
 
 
 
@@ -58,6 +59,7 @@ function App() {
           <Route path="/inscription" element={<Inscription />} />
           <Route path="/connexion" element={<Connexion />} />
           <Route path="/deconnexion" element={<Deconnexion />} />
+          <Route path="/users" element={<UserList />} />
           
 
           
