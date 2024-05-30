@@ -34,20 +34,23 @@ function ListeDesProjets() {
       });
   }, []);
   const supprimerProjet = async (id) => {
-    if (!window.confirm("Voulez-vous vraiment supprimer ce projet ?")) {
-      return;
-    }
-    const response = await fetch(`http://localhost:3000/projet/${id}`, {
-      method: "DELETE",
-    });
+  if (!window.confirm("Voulez-vous vraiment supprimer ce projet ?")) {
+    return;
+  }
+  const response = await fetch(`http://localhost:3000/projet/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
 
-    if (response.ok) {
-      alert("Projet supprimé avec succès");
-      setProjets(projets.filter((projet) => projet.id !== id));
-    } else {
-      alert("Erreur lors de la suppression du projet");
-    }
-  };
+  if (response.ok) {
+    alert("Projet supprimé avec succès");
+    setProjets(projets.filter((projet) => projet.id !== id));
+  } else {
+    alert("Erreur lors de la suppression du projet");
+  }
+};
   const validerProjet = async (id) => {
   const response = await fetch(`http://localhost:3000/projet/${id}/valider`, {
     method: "PUT",
