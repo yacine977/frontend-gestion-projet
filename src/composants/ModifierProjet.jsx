@@ -13,7 +13,15 @@ function ModifierProjet() {
 
   useEffect(() => {
     const fetchProjet = async () => {
-      const response = await fetch(`http://localhost:3000/projet/${id}`);
+      const response = await fetch(`http://localhost:3000/projet/${id}`, {
+  headers: {
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
+  }
+});
+      //ajouter le token d'authentification
+      
+        
+      
       const data = await response.json();
       const projet = data[0]; // Accédez au premier élément du tableau
 
@@ -71,12 +79,13 @@ if (dateFinReel) {
     const projet = { nom, description, dateDebut, dateFinPrevu, dateFinReel, chefDeProjetId };
 
     const response = await fetch(`http://localhost:3000/projet/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(projet),
-    });
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${localStorage.getItem('token')}`, // Ajoutez cette ligne
+  },
+  body: JSON.stringify(projet),
+});
 
     if (response.ok) {
       alert('Projet modifié avec succès');
