@@ -1,0 +1,54 @@
+/* DetailProjet.css */
+
+.detail-projet {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
+
+.detail-projet:hover {
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.detail-projet h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    font-family: 'Arial', sans-serif;
+}
+
+.detail-projet p {
+    font-size: 1.1em;
+    color: #666;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    font-family: 'Verdana', sans-serif;
+}
+
+.button-group {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.button {
+    display: inline-block;
+    padding: 15px 25px;
+    margin: 5px;
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
