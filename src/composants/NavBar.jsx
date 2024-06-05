@@ -34,14 +34,14 @@ function NavBar() {
             <Link to="/creer-reunion" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Créer une réunion</Link>
             <div style={{ color: 'white', marginLeft: '10px' }}>
               Connecté en tant que : <strong>{user.email}</strong>
-            </div>
-            <Link to="/deconnexion" style={{ color: '#FF4500', textDecoration: 'none', margin: '0 10px', fontSize: '20px' }}>Déconnexion</Link>
+            </div><br />
+            <Link to="/deconnexion" style={{ color: '#FF4500', backgroundColor: '#282c34', textDecoration: 'none', margin: '0 10px', fontSize: '25px', padding: '5px', borderRadius: '5px', border: '2px solid #FF4500' }}>Déconnexion</Link>
           </>
         )}
         {!user && (
           <>
-            <Link to="/inscription" style={{ color: '#FFD700', textDecoration: 'none', margin: '0 10px', fontSize: '20px' }}>Inscription</Link>
-            <Link to="/connexion" style={{ color: '#FFD700', textDecoration: 'none', margin: '0 10px', fontSize: '20px' }}>Connexion</Link>
+            <Link to="/inscription" style={{ color: '#FFD700', backgroundColor: '#282c34', textDecoration: 'none', margin: '0 10px', fontSize: '25px', padding: '5px', borderRadius: '5px', border: '2px solid #FFD700' }}>Inscription</Link>
+            <Link to="/connexion" style={{ color: '#FFD700', backgroundColor: '#282c34', textDecoration: 'none', margin: '0 10px', fontSize: '25px', padding: '5px', borderRadius: '5px', border: '2px solid #FFD700' }}>Connexion</Link>
           </>
         )}
       </div>
