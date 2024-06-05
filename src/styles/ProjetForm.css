@@ -1,18 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
 .creer-projet {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 50px;
     background-color: #f5f5f5;
+    font-family: 'Roboto', sans-serif;
+}
+
+.creer-projet h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.creer-projet .input-group {
+    width: 100%;
+    margin-bottom: 15px;
 }
 
 .creer-projet label {
-    margin: 10px 0;
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
 }
 
 .creer-projet input,
 .creer-projet textarea {
-    margin-left: 10px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+
+.creer-projet input:focus,
+.creer-projet textarea:focus {
+    border-color: #007BFF;
+    outline: none;
 }
 
 .creer-projet button {
@@ -23,6 +50,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .creer-projet button:hover {

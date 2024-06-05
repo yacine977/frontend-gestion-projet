@@ -67,32 +67,33 @@ function CreerProjet() {
 
   return (
     <form onSubmit={handleSubmit} className='creer-projet'>
-      <label>
-        Nom:
-        <input type="text" value={nom} onChange={(e) => setNom(e.target.value)} required />
-      </label>
-      <label>
-        Description:
-        <textarea value={description} onChange={(e) => setDescription(e.target.value)} required />
-      </label>
-      <label>
-        Date de début:
-        <input type="date" value={dateDebut} onChange={(e) => setDateDebut(e.target.value)} required />
-      </label>
-      <label>
-        Date de fin prévue:
-        <input type="date" value={dateFinPrevu} onChange={(e) => setDateFinPrevu(e.target.value)} required />
-      </label>
-      <label>
-        Date de fin réelle:
-        <input type="date" value={dateFinReel} onChange={(e) => setDateFinReel(e.target.value)} />
-      </label>
-      <label>
-        Chef de projet ID:
-        <input type="number" value={chefDeProjetId} onChange={(e) => setChefDeProjetId(e.target.value)} required />
-      </label>
-      <button type="submit">Créer le projet</button>
-    </form>
+    <h2>Créer un nouveau projet</h2>
+    <div className="input-group">
+      <label>Nom:</label>
+      <input type="text" value={nom} onChange={(e) => setNom(e.target.value)} required />
+    </div>
+    <div className="input-group">
+      <label>Description:</label>
+      <textarea value={description} onChange={(e) => setDescription(e.target.value)} required />
+    </div>
+    <div className="input-group">
+      <label>Date de début:</label>
+      <input type="date" value={dateDebut} onChange={(e) => setDateDebut(e.target.value)} required />
+    </div>
+    <div className="input-group">
+      <label>Date de fin prévue:</label>
+      <input type="date" value={dateFinPrevu} onChange={(e) => setDateFinPrevu(e.target.value)} required />
+    </div>
+    <div className="input-group">
+      <label>Date de fin réelle:</label>
+      <input type="date" value={dateFinReel} onChange={(e) => setDateFinReel(e.target.value)} />
+    </div>
+    <div className="input-group">
+      <label>Chef de projet ID:</label>
+      <input type="number" value={chefDeProjetId} onChange={(e) => setChefDeProjetId(e.target.value)} required />
+    </div>
+    <button type="submit">Créer le projet</button>
+  </form>
   );
 }
 
