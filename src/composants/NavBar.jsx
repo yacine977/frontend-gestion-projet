@@ -11,26 +11,27 @@ function NavBar() {
         Mon Application
       </h1>
       <div>
-        <Link to="/" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Accueil</Link>
-        {role === 'PDG' && (
+        
+            <Link to="/" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Accueil</Link>
+            {user && (
           <>
-        <Link to="/projets" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Projets</Link>
-        <Link to="/creer-projet" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Créer un projet</Link>
-        </>
-        )}
-        <Link to="/taches" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Tâches</Link>
-        {(role === 'ChefDeProjet' || role === 'PDG') && (
-        <Link to="/creer-tache" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Créer une tâche</Link>
-      )}
-        <Link to="/creer-document" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Créer un document</Link>
-        { (role === 'AdministrateurInfrastructure' || role === 'PDG') && (
-  <Link to="/users" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Utilisateurs</Link>
-)}
-        <Link to="/documents" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Documents</Link>
-        <Link to="/reunions" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Réunions</Link>
-        <Link to="/creer-reunion" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Créer une réunion</Link>
-        {user && (
-          <>
+            {role === 'PDG' && (
+              <>
+                <Link to="/projets" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Projets</Link>
+                <Link to="/creer-projet" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Créer un projet</Link>
+              </>
+            )}
+            <Link to="/taches" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Tâches</Link>
+            {(role === 'ChefDeProjet' || role === 'PDG') && (
+              <Link to="/creer-tache" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Créer une tâche</Link>
+            )}
+            <Link to="/creer-document" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Créer un document</Link>
+            {(role === 'AdministrateurInfrastructure' || role === 'PDG') && (
+              <Link to="/users" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Utilisateurs</Link>
+            )}
+            <Link to="/documents" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Documents</Link>
+            <Link to="/reunions" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Réunions</Link>
+            <Link to="/creer-reunion" style={{ color: 'white', textDecoration: 'none', margin: '0 10px' }}>Créer une réunion</Link>
             <div style={{ color: 'white', marginLeft: '10px' }}>
               Connecté en tant que : <strong>{user.email}</strong>
             </div>
