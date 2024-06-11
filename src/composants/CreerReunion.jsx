@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+
 
 function CreerReunion() {
   const [sujet, setSujet] = useState("");
   const [dateTime, setDateTime] = useState("");
-  const [projetId, setProjetId] = useState("");
   const [createurId, setCreateurId] = useState("");
+  const { projetId: initialProjetId } = useParams();
+  const [projetId, setProjetId] = useState(initialProjetId || 0);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

@@ -57,6 +57,16 @@ function DetailProjet() {
         <Link to={`/documents-projet/${projet.id}`} className='button'>
           Voir les documents de ce projet
         </Link>
+        
+        
+        
+        <Link to={`/creer-reunion/${projet.id}`} className='button'>
+          Créer une réunion pour ce projet
+        </Link>
+
+        <Link to={`/reunion-projet/${projet.id}`} className='button'>
+          Voir les réunions de ce projet
+        </Link>
       </div>
     </div>
   );

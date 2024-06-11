@@ -23,6 +23,7 @@ import Inscription from './composants/Inscription';
 import Connexion from './composants/Connexion';
 import Deconnexion from './composants/Deconnexion';
 import UserList from './composants/UsersList';
+import ReunionProjet from './composants/ReunionProjet';
 
 
 
@@ -52,14 +53,18 @@ function App() {
           <Route path="/taches-projet/:projetId" element={<TachesProjet />} />
           <Route path="/creer-tache/:projetId?" element={<CreerTache />} />
           <Route path="/creer-document/:projetId?" element={<CreerDocument />} />
+          <Route path="/creer-reunion/:projetId?" element={<CreerReunion />} />
           <Route path="/documents-projet/:projetId" element={<ProjectDocuments />} />
+          <Route path="/reunion-projet/:projetId" element={<ReunionProjet />} />
           <Route path="/reunions" element={<ListeReunions />} />
-          <Route path="/creer-reunion" element={<CreerReunion />} />
+          
           <Route path="/modifier-reunion/:id" element={<ModifierReunion />} />
           <Route path="/inscription" element={<Inscription />} />
           <Route path="/connexion" element={<Connexion />} />
           <Route path="/deconnexion" element={<Deconnexion />} />
           <Route path="/users" element={<UserList />} />
+          
+
           
 
           
