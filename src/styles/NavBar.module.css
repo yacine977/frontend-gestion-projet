@@ -1,0 +1,38 @@
+.navStyle {
+    background: #343a40; /* Noir clair pour la barre de navigation */
+    padding: 40px 30px; /* Augmentation du padding vertical pour agrandir la hauteur */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Ombre ajustée pour un meilleur contraste */
+    border-radius: 5px;
+}
+
+.linkStyle {
+    color: #f8f9fa; /* Couleur plus claire pour les liens, pour un contraste élevé */
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 18px;
+    font-weight: 500;
+    transition: color 0.3s, transform 0.2s;
+}
+
+.linkStyle:hover {
+    color: #ced4da; /* Gris clair au survol pour un contraste subtil */
+    transform: translateY(-2px);
+}
+
+.specialLinkStyle {
+    color: #f8f9fa; /* Couleur claire pour les liens spéciaux, pour un contraste élevé */
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #f8f9fa; /* Bordure claire pour un effet intégré */
+    background-color: #495057; /* Fond noir moyen pour distinguer le lien spécial */
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.specialLinkStyle:hover {
+    transform: scale(1.05);
+    background-color: #6c757d; /* Gris moyen plus clair au survol */
+}
