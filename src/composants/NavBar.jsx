@@ -51,13 +51,9 @@ function UserSection({ user }) {
     </>
   ) : (
     <>
-    
       <CustomLink to="/inscription" className={styles.specialLinkStyle}>
         Inscription
       </CustomLink>
-      
-
-
       <CustomLink to="/connexion" className={styles.specialLinkStyle}>
         Connexion
       </CustomLink>
@@ -74,7 +70,12 @@ function NavBar() {
       <h1 className={styles.linkStyle} style={{ flexGrow: 1 }}>Mon Application</h1>
       <div>
         <CustomLink to="/" className={styles.linkStyle}>Accueil</CustomLink>
-        {user && (
+        {user && role === "AdministrateurInfrastructure" ? (
+          <>
+            <LinksForRole role={role} />
+            <UserSection user={user} />
+          </>
+        ) : user ? (
           <>
             <LinksForRole role={role} />
             <CustomLink to="/taches" className={styles.linkStyle}>Tâches</CustomLink>
@@ -84,8 +85,9 @@ function NavBar() {
             <CustomLink to="/creer-reunion" className={styles.linkStyle}>Créer une réunion</CustomLink>
             <UserSection user={user} />
           </>
+        ) : (
+          <UserSection />
         )}
-        {!user && <UserSection />}
       </div>
     </nav>
   );
