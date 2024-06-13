@@ -17,24 +17,30 @@ function LinksForRole({ role }) {
         <>
           <CustomLink to="/projets" className={styles.linkStyle}>Projets</CustomLink>
           <CustomLink to="/creer-projet" className={styles.linkStyle}>Créer un projet</CustomLink>
-          <CustomLink to="/creer-tache" className={styles.linkStyle}>Créer une tâche</CustomLink>
+          
           <CustomLink to="/users" className={styles.linkStyle}>Utilisateurs</CustomLink>
         </>
       );
     case "ChefDeProjet":
+    case "UtilisateurStandard": // Ajout du cas pour UtilisateurStandard
       return (
         <>
-          <CustomLink to="/creer-tache" className={styles.linkStyle}>Créer une tâche</CustomLink>
+          <CustomLink to="/projets" className={styles.linkStyle}>Projets</CustomLink>
         </>
       );
     case "AdministrateurInfrastructure":
       return (
         <>
+          <CustomLink to="/projets" className={styles.linkStyle}>Projets</CustomLink>
           <CustomLink to="/users" className={styles.linkStyle}>Utilisateurs</CustomLink>
         </>
       );
     default:
-      return null;
+      return (
+        <>
+          <CustomLink to="/projets" className={styles.linkStyle}>Projets</CustomLink>
+        </>
+      );
   }
 }
 
@@ -70,19 +76,9 @@ function NavBar() {
       <h1 className={styles.linkStyle} style={{ flexGrow: 1 }}>Mon Application</h1>
       <div>
         <CustomLink to="/" className={styles.linkStyle}>Accueil</CustomLink>
-        {user && role === "AdministrateurInfrastructure" ? (
+        {user ? (
           <>
             <LinksForRole role={role} />
-            <UserSection user={user} />
-          </>
-        ) : user ? (
-          <>
-            <LinksForRole role={role} />
-            <CustomLink to="/taches" className={styles.linkStyle}>Tâches</CustomLink>
-            <CustomLink to="/creer-document" className={styles.linkStyle}>Créer un document</CustomLink>
-            <CustomLink to="/documents" className={styles.linkStyle}>Documents</CustomLink>
-            <CustomLink to="/reunions" className={styles.linkStyle}>Réunions</CustomLink>
-            <CustomLink to="/creer-reunion" className={styles.linkStyle}>Créer une réunion</CustomLink>
             <UserSection user={user} />
           </>
         ) : (

@@ -7,29 +7,22 @@ function DetailProjet() {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/projet/${id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
+  fetch(`http://localhost:3000/projet/${id}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Erreur HTTP: ${response.status}`);
+      }
+      return response.json();
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Erreur HTTP: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        const [projet] = data;
-        setProjet(projet);
-      })
-      .catch((error) => {
-        console.error(
-          "Une erreur est survenue lors de la récupération du projet : ",
-          error
-        );
-      });
-  }, [id]);
+    .then((data) => {
+      console.log(data);
+      const [projet] = data;
+      setProjet(projet);
+    })
+    .catch((error) => {
+      console.error("Une erreur est survenue lors de la récupération du projet : ", error);
+    });
+}, [id]);
 
   if (!projet) {
     return <div>Chargement...</div>;
