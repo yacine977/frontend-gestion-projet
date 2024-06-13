@@ -15,30 +15,51 @@ function LinksForRole({ role }) {
     case "PDG":
       return (
         <>
-          <CustomLink to="/projets" className={styles.linkStyle}>Projets</CustomLink>
-          <CustomLink to="/creer-projet" className={styles.linkStyle}>Créer un projet</CustomLink>
-          
-          <CustomLink to="/users" className={styles.linkStyle}>Utilisateurs</CustomLink>
+          <CustomLink to="/projets" className={styles.linkStyle}>
+            Projets
+          </CustomLink>
+          <CustomLink to="/creer-projet" className={styles.linkStyle}>
+            Créer un projet
+          </CustomLink>
+
+          <CustomLink to="/taches" className={styles.linkStyle}>
+            Tâches
+          </CustomLink>
+
+          <CustomLink to="/creer-tache" className={styles.linkStyle}>
+            Créer une tâche
+          </CustomLink>
+          <CustomLink to="/users" className={styles.linkStyle}>
+            Utilisateurs
+          </CustomLink>
         </>
       );
     case "ChefDeProjet":
     case "UtilisateurStandard": // Ajout du cas pour UtilisateurStandard
       return (
         <>
-          <CustomLink to="/projets" className={styles.linkStyle}>Projets</CustomLink>
+          <CustomLink to="/projets" className={styles.linkStyle}>
+            Projets
+          </CustomLink>
         </>
       );
     case "AdministrateurInfrastructure":
       return (
         <>
-          <CustomLink to="/users" className={styles.linkStyle}>Utilisateurs</CustomLink>
-          <CustomLink to="/createUser" className={styles.linkStyle}>Créer un utilisateur</CustomLink>
+          <CustomLink to="/users" className={styles.linkStyle}>
+            Utilisateurs
+          </CustomLink>
+          <CustomLink to="/createUser" className={styles.linkStyle}>
+            Créer un utilisateur
+          </CustomLink>
         </>
       );
     default:
       return (
         <>
-          <CustomLink to="/projets" className={styles.linkStyle}>Projets</CustomLink>
+          <CustomLink to="/projets" className={styles.linkStyle}>
+            Projets
+          </CustomLink>
         </>
       );
   }
@@ -73,9 +94,13 @@ function NavBar() {
 
   return (
     <nav className={styles.navStyle}>
-      <h1 className={styles.linkStyle} style={{ flexGrow: 1 }}>Mon Application</h1>
+      <h1 className={styles.linkStyle} style={{ flexGrow: 1 }}>
+        Mon Application
+      </h1>
       <div>
-        <CustomLink to="/" className={styles.linkStyle}>Accueil</CustomLink>
+        <CustomLink to="/" className={styles.linkStyle}>
+          Accueil
+        </CustomLink>
 
         {user ? (
           <>

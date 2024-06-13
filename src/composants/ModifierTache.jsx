@@ -14,7 +14,7 @@ function ModifierTache() {
   const [dateFinReel, setDateFinReel] = useState('');
   const [projetId, setProjetId] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [setErrors] = useState({});
 
   useEffect(() => {
     const fetchTache = async () => {
