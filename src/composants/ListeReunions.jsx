@@ -26,22 +26,19 @@ function ListeReunions() {
     }
   }
 
-
   return (
     <div>
-      
-      
       <h1>Liste des réunions</h1>
-      {reunions.map((reunion) => (
-        <div key={reunion.id}>
-          <h2>{reunion.sujet}</h2>
-          <p>Date et heure : {reunion.dateTime}</p>
-          <p>ID du projet : {reunion.projetId}</p>
-          <p>ID du créateur : {reunion.createurId}</p>
-          <a href={`/modifier-reunion/${reunion.id}`}>Modifier</a>
-          <button onClick={() => supprimerReunion(reunion.id)}>Supprimer</button>
-        </div>
-      ))}
+      {reunions.map((reunion, index) => (
+  <div key={index}> {/* Utilisation de l'index comme clé */}
+    <h2>{reunion.sujet}</h2>
+    <p>Date et heure : {reunion.dateTime}</p>
+    <p>Nom du projet : {reunion.nomProjet}</p>
+    <p>ID du créateur : {reunion.createurId}</p>
+    <a href={`/modifier-reunion/${reunion.id}`}>Modifier</a>
+    <button onClick={() => supprimerReunion(reunion.id)}>Supprimer</button>
+  </div>
+))}
     </div>
   );
 }
