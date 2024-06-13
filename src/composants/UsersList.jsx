@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import {
   faUserCheck,
-  faProjectDiagram,faTrashAlt
+  faProjectDiagram,faTrashAlt,faUserEdit
 } from "@fortawesome/free-solid-svg-icons";
 
 function UserList() {
@@ -126,6 +126,35 @@ function UserList() {
           <button className="buttonMarginRight" onClick={() => fetchUserProjects(user.uid).then(projects => alert(`Projets: ${projects}`))}>
           <FontAwesomeIcon icon={faProjectDiagram} /> Voir les projets
           </button>
+          <button
+  className="updateButton"
+  onClick={async () => {
+    const email = prompt("Entrez le nouvel email de l'utilisateur:");
+    const password = prompt("Entrez le nouveau mot de passe de l'utilisateur:");
+    if (email && password) {
+      try {
+        const response = await fetch(`http://localhost:3000/utilisateur/updateUser/${user.uid}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        });
+        if (!response.ok) {
+          throw new Error(`Erreur HTTP: ${response.status}`);
+        }
+        const data = await response.json();
+        alert(data.message);
+        // Optionnel: Actualiser la liste des utilisateurs après la mise à jour
+      } catch (error) {
+        console.error("Erreur lors de la mise à jour de l'utilisateur :", error);
+        alert("Une erreur est survenue. Veuillez réessayer.");
+      }
+    }
+  }}
+>
+  <FontAwesomeIcon icon={faUserEdit} /> Mettre à jour
+</button>
           <button
   className="deleteButton"
   onClick={async () => {
