@@ -39,20 +39,50 @@ function UserList() {
   };
 
   const assignUsersToProject = async (projectId, uid) => {
-    const response = await fetch(
-      `http://localhost:3000/projet/${projectId}/assignerFirebase`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify({ utilisateurs: [uid] }),
+    try {
+      const response = await fetch(
+        `http://localhost:3000/projet/${projectId}/assigner`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({ uid }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Erreur HTTP: ${response.status}`);
       }
-    );
-    const data = await response.json();
-    alert(data.message);
+
+      const data = await response.json();
+      alert(data.message);
+    } catch (error) {
+      console.error("Erreur lors de l'assignation des utilisateurs au projet :", error);
+      alert("Une erreur est survenue. Veuillez réessayer.");
+    }
   };
+
+  const fetchUserProjects = async (uid) => {
+    try {
+      const response = await fetch(`http://localhost:3000/projet/par-utilisateur/${uid}`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      if (!response.ok) {
+        throw new Error(`Erreur HTTP: ${response.status}`);
+      }
+      const projects = await response.json();
+      return projects.map(project => project.nom).join(', ');
+    } catch (error) {
+      console.error("Erreur lors de la récupération des projets de l'utilisateur :", error);
+      return "Erreur lors de la récupération des projets";
+    }
+  };
+
+  
 
   return (
     <div className="userListContainer">
@@ -92,6 +122,10 @@ function UserList() {
             }}>
             <FontAwesomeIcon icon={faProjectDiagram} /> Assigner au projet
           </button>
+          <button onClick={() => fetchUserProjects(user.uid).then(projects => alert(`Projets: ${projects}`))}>
+          <FontAwesomeIcon icon={faProjectDiagram} /> Voir les projets
+          </button>
+          
         </div>
       ))}
     </div>
