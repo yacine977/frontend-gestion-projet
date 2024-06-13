@@ -7,7 +7,7 @@ function CreerProjet() {
   const [dateDebut, setDateDebut] = useState('');
   const [dateFinPrevu, setDateFinPrevu] = useState('');
   const [dateFinReel, setDateFinReel] = useState('');
-  const [chefDeProjetId, setChefDeProjetId] = useState('');
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -18,11 +18,7 @@ function CreerProjet() {
       return;
     }
 
-    // Vérifier si l'ID du chef de projet est un nombre
-    if (isNaN(chefDeProjetId) || chefDeProjetId < 1) {
-      alert('L\'ID du chef de projet doit être un nombre positif');
-      return;
-    }
+    
 
     // Convertir les dates en objets Date pour la comparaison
     const debut = new Date(dateDebut);
@@ -41,7 +37,7 @@ function CreerProjet() {
       return;
     }
 
-    const projet = { nom, description, dateDebut, dateFinPrevu, dateFinReel, chefDeProjetId };
+    const projet = { nom, description, dateDebut, dateFinPrevu, dateFinReel};
 
     const response = await fetch('http://localhost:3000/projet', {
       method: 'POST',
@@ -59,7 +55,7 @@ function CreerProjet() {
       setDateDebut('');
       setDateFinPrevu('');
       setDateFinReel('');
-      setChefDeProjetId('');
+      
     } else {
       alert('Erreur lors de la création du projet');
     }
@@ -88,10 +84,7 @@ function CreerProjet() {
       <label>Date de fin réelle:</label>
       <input type="date" value={dateFinReel} onChange={(e) => setDateFinReel(e.target.value)} />
     </div>
-    <div className="input-group">
-      <label>Chef de projet ID:</label>
-      <input type="number" value={chefDeProjetId} onChange={(e) => setChefDeProjetId(e.target.value)} required />
-    </div>
+    
     <button type="submit">Créer le projet</button>
   </form>
   );

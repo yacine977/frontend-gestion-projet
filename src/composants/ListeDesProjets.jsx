@@ -106,7 +106,7 @@ function ListeDesProjets() {
               ? new Date(projet.dateFinReel).toLocaleDateString()
               : "Non défini"}
           </p>
-          <p>Chef de projet ID : {projet.chefDeProjetId}</p>
+         
           <p>Est validé : {projet.est_valide ? "Oui" : "Non"}</p>
         </div>
       ))}

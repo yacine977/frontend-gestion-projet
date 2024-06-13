@@ -9,7 +9,7 @@ function ModifierProjet() {
   const [dateDebut, setDateDebut] = useState('');
   const [dateFinPrevu, setDateFinPrevu] = useState('');
   const [dateFinReel, setDateFinReel] = useState('');
-  const [chefDeProjetId, setChefDeProjetId] = useState('');
+  
 
   useEffect(() => {
     const fetchProjet = async () => {
@@ -35,7 +35,7 @@ function ModifierProjet() {
       setDateDebut(dateDebut);
       setDateFinPrevu(dateFinPrevu);
       setDateFinReel(dateFinReel);
-      setChefDeProjetId(projet.chefDeProjetId);
+      
     };
 
     fetchProjet();
@@ -50,10 +50,7 @@ function ModifierProjet() {
       return;
     }
 
-    if (isNaN(chefDeProjetId) || chefDeProjetId < 1) {
-      alert('L\'ID du chef de projet doit être un nombre positif');
-      return;
-    }
+   
 
     // Convertir les dates en objets Date pour la comparaison
     const debut = new Date(dateDebut);
@@ -76,7 +73,7 @@ if (dateFinReel) {
       return;
     }
 
-    const projet = { nom, description, dateDebut, dateFinPrevu, dateFinReel, chefDeProjetId };
+    const projet = { nom, description, dateDebut, dateFinPrevu, dateFinReel};
 
     const response = await fetch(`http://localhost:3000/projet/${id}`, {
   method: 'PUT',
@@ -114,12 +111,9 @@ if (dateFinReel) {
       </label>
       <label>
         Date de fin réelle:
-        <input type="date" value={dateFinReel} onChange={(e) => setDateFinReel(e.target.value)} />
+        <input type="date" value={dateFinReel} onChange={(e) => setDateFinReel(e.target.value)} required />
       </label>
-      <label>
-        Chef de projet ID:
-        <input type="number" value={chefDeProjetId} onChange={(e) => setChefDeProjetId(e.target.value)}  />
-      </label>
+      
       
       <button type="submit">Modifier le projet</button>
     </form>
