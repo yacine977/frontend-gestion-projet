@@ -31,8 +31,8 @@ function LinksForRole({ role }) {
     case "AdministrateurInfrastructure":
       return (
         <>
-          <CustomLink to="/projets" className={styles.linkStyle}>Projets</CustomLink>
           <CustomLink to="/users" className={styles.linkStyle}>Utilisateurs</CustomLink>
+          <CustomLink to="/createUser" className={styles.linkStyle}>Créer un utilisateur</CustomLink>
         </>
       );
     default:
@@ -76,6 +76,7 @@ function NavBar() {
       <h1 className={styles.linkStyle} style={{ flexGrow: 1 }}>Mon Application</h1>
       <div>
         <CustomLink to="/" className={styles.linkStyle}>Accueil</CustomLink>
+
         {user ? (
           <>
             <LinksForRole role={role} />
