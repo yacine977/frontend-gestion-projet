@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "../styles/UserList.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import {
   faUserCheck,
-  faProjectDiagram,
+  faProjectDiagram,faTrashAlt
 } from "@fortawesome/free-solid-svg-icons";
 
 function UserList() {
@@ -122,9 +123,34 @@ function UserList() {
             }}>
             <FontAwesomeIcon icon={faProjectDiagram} /> Assigner au projet
           </button>
-          <button onClick={() => fetchUserProjects(user.uid).then(projects => alert(`Projets: ${projects}`))}>
+          <button className="buttonMarginRight" onClick={() => fetchUserProjects(user.uid).then(projects => alert(`Projets: ${projects}`))}>
           <FontAwesomeIcon icon={faProjectDiagram} /> Voir les projets
           </button>
+          <button
+  className="deleteButton"
+  onClick={async () => {
+    const confirmation = window.confirm("Êtes-vous sûr de vouloir supprimer cet utilisateur ?");
+    if (confirmation) {
+      try {
+        const response = await fetch(`http://localhost:3000/utilisateur/deleteUser/${user.uid}`, {
+          method: "DELETE",
+        });
+        if (!response.ok) {
+          throw new Error(`Erreur HTTP: ${response.status}`);
+        }
+        const data = await response.json();
+        alert(data.message);
+        // Actualiser la liste des utilisateurs après la suppression
+        setUsers(users.filter((u) => u.uid !== user.uid));
+      } catch (error) {
+        console.error("Erreur lors de la suppression de l'utilisateur :", error);
+        alert("Une erreur est survenue. Veuillez réessayer.");
+      }
+    }
+  }}
+>
+  <FontAwesomeIcon icon={faTrashAlt} /> Supprimer
+</button>
           
         </div>
       ))}
