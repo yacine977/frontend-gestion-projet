@@ -15,6 +15,31 @@ const [projetId, setProjetId] = useState(initialProjetId || 0);
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // Vérifier si la description et le statut ne sont pas vides
+    if (!description.trim() || !statut.trim()) {
+      alert('La description et le statut ne peuvent pas être vides');
+      return;
+    }
+
+    // Convertir les dates en objets Date pour la comparaison
+    const debut = new Date(dateDebut);
+    const finPrevu = new Date(dateFinPrevu);
+    const finReel = dateFinReel ? new Date(dateFinReel) : null;
+
+    // Vérifier si la date de début est supérieure à la date de fin prévue
+    if (debut > finPrevu) {
+      alert('La date de début ne peut pas être supérieure à la date de fin prévue');
+      return;
+    }
+
+    // Vérifier si la date de fin réelle est inférieure à la date de début
+    if (finReel && finReel < debut) {
+      alert('La date de fin réelle ne peut pas être inférieure à la date de début');
+      return;
+    }
+
+    
+
     const tache = { description, priorite, statut, dateDebut, dateFinPrevu, dateFinReel, projetId };
 
     const response = await fetch('http://localhost:3000/tache', {
