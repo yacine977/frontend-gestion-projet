@@ -39,17 +39,19 @@ function DetailProjet() {
       <p>Chef de projet ID : {projet.chefDeProjetId}</p>
       <p>Est validé : {projet.est_valide ? 'Oui' : 'Non'}</p>
       <div className='button-group'>
-        <Link to={`/taches-projet/${projet.id}`} className='button'>
-          Voir les tâches de ce projet
-        </Link>
+       
+        <Link to={`/creer-document/${projet.id}`} className='button'>
+              Créer un document pour ce projet
+            </Link>
         {role === "PDG" || role === "ChefDeProjet" ? (
           <>
             <Link to={`/creer-tache/${projet.id}`} className='button'>
               Créer une tâche pour ce projet
             </Link>
-            <Link to={`/creer-document/${projet.id}`} className='button'>
-              Créer un document pour ce projet
-            </Link>
+            <Link to={`/taches-projet/${projet.id}`} className='button'>
+          Voir les tâches de ce projet
+        </Link>
+            
           </>
         ) : null}
         <Link to={`/documents-projet/${projet.id}`} className='button'>

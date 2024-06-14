@@ -25,6 +25,8 @@ function ReunionProjet() {
       <p>ID du projet : {reunion.projetId}</p>
       <p>ID du créateur : {reunion.createurId}</p>
       {/* ... Afficher d'autres détails de la réunion comme vous le souhaitez */}
+      // Ajout du bouton de suppression de la réunion
+      
     </div>
   ))
 ) : (

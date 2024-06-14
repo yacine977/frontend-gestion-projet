@@ -1,6 +1,6 @@
+// Importation des bibliothèques et composants nécessaires
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Modifiez cette ligne
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import ListeDesProjets from "./composants/ListeDesProjets";
 import CreerProjet from "./composants/CreerProjet";
@@ -27,6 +27,7 @@ import ReunionProjet from "./composants/ReunionProjet";
 import CreateUser from "./composants/CreateUser";
 
 function App() {
+  // État local inutilisé, pourrait être supprimé si non utilisé dans le futur
   const [count, setCount] = useState(0);
 
   return (
@@ -34,6 +35,7 @@ function App() {
       <NavBar />
       <div>
         <Routes>
+          {/* Routes pour la navigation dans l'application */}
           <Route path="/" element={<HomePage />} />
           <Route path="/projets" element={<ListeDesProjets />} />
           <Route path="/creer-projet" element={<CreerProjet />} />
@@ -59,7 +61,6 @@ function App() {
           />
           <Route path="/reunion-projet/:projetId" element={<ReunionProjet />} />
           <Route path="/reunions" element={<ListeReunions />} />
-
           <Route path="/modifier-reunion/:id" element={<ModifierReunion />} />
           <Route path="/inscription" element={<Inscription />} />
           <Route path="/connexion" element={<Connexion />} />
