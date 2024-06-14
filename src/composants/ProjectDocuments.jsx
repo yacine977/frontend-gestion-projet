@@ -7,10 +7,15 @@ function ProjectDocuments() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`http://localhost:3000/document/projet/${projetId}`);
-      if (response.ok) {
+      try {
+        const response = await fetch(`http://localhost:3000/document/projet/${projetId}`);
+        if (!response.ok) {
+          throw new Error('La requête a échoué');
+        }
         const data = await response.json();
         setDocuments(data);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des documents:", error);
       }
     };
 
