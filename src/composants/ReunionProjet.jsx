@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function ReunionProjet() {
   const [reunions, setReunions] = useState([]);
@@ -44,7 +45,7 @@ function ReunionProjet() {
             <p>Date et heure : {new Date(reunion.dateTime).toLocaleString('fr-FR')}</p>
             <p>ID du projet : {reunion.projetId}</p>
             <p>ID du créateur : {reunion.createurId}</p>
-            {/* ... Afficher d'autres détails de la réunion comme vous le souhaitez */}
+            <Link to={`/modifier-reunion/${reunion.id}`}>Modifier la réunion</Link>
             <button onClick={() => supprimerReunion(reunion.id)}>Supprimer la réunion</button>
           </div>
         ))
