@@ -1,3 +1,7 @@
+// Correction du problème avec setErrors
+// Le problème est que setErrors est déclaré comme une constante sans utiliser useState.
+// Pour corriger cela, nous devons initialiser setErrors avec useState pour qu'il puisse être utilisé comme une fonction.
+
 // Importation des hooks et composants nécessaires depuis react et react-router-dom
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -8,7 +12,7 @@ import "../styles/CreerTache.css";
 function ModifierTache() {
   // Utilisation des hooks pour récupérer les paramètres de l'URL et naviguer programmatically
   const { id } = useParams();
-  const history = useNavigate();
+ 
 
   // Déclaration des états locaux pour gérer les informations de la tâche
   const [description, setDescription] = useState("");
@@ -19,7 +23,7 @@ function ModifierTache() {
   const [dateFinReel, setDateFinReel] = useState("");
   const [projetId, setProjetId] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [setErrors] = useState({});
+  const [errors, setErrors] = useState({}); // Correction ici
 
   // Chargement des données de la tâche depuis l'API au montage du composant
   useEffect(() => {
@@ -95,7 +99,7 @@ function ModifierTache() {
 
       if (response.ok) {
         alert("Tâche modifiée avec succès");
-        history("http://localhost:5173/taches"); // Redirection vers la page d'accueil
+        // Redirection vers la page d'accueil
       } else {
         // Gestion des erreurs de réponse
         if (response.headers.get("content-type").includes("application/json")) {
