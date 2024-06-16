@@ -68,6 +68,8 @@ function ListeDesTaches() {
           <button onClick={() => deleteTache(tache.id)} className="button">
             Supprimer
           </button>
+      
+
         </div>
       ))}
     </div>

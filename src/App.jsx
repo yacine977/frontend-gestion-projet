@@ -25,6 +25,7 @@ import Deconnexion from "./composants/Deconnexion";
 import UserList from "./composants/UsersList";
 import ReunionProjet from "./composants/ReunionProjet";
 import CreateUser from "./composants/CreateUser";
+import ListeTacheUtilisateur from "./composants/ListeTacheUtilisateur";
 
 function App() {
   // État local inutilisé, pourrait être supprimé si non utilisé dans le futur
@@ -67,6 +68,10 @@ function App() {
           <Route path="/deconnexion" element={<Deconnexion />} />
           <Route path="/users" element={<UserList />} />
           <Route path="/createUser" element={<CreateUser />} />
+          <Route
+            path="/liste-tache-utilisateur/:uid"
+            element={<ListeTacheUtilisateur />}
+          />
         </Routes>
       </div>
     </Router>

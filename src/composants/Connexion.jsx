@@ -1,38 +1,32 @@
 import React, { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import app from "../firebase"; // Vérifiez que le chemin d'accès à Firebase est correct.
+import app from "../firebase"; // Assurez-vous que le chemin d'accès à votre configuration Firebase est correct.
 
-// Composant de connexion utilisant Firebase pour l'authentification.
 function Connexion() {
-  // État local pour stocker l'email et le mot de passe de l'utilisateur.
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Gère la soumission du formulaire de connexion.
   const connexion = (e) => {
-    e.preventDefault(); // Empêche le rechargement de la page.
-    const auth = getAuth(app); // Initialise l'authentification Firebase.
+    e.preventDefault();
+    const auth = getAuth(app);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Récupère le token et les informations de l'utilisateur après une connexion réussie.
         userCredential.user.getIdTokenResult().then((idTokenResult) => {
-          // Stocke le token et les informations de l'utilisateur dans localStorage.
           localStorage.setItem("token", idTokenResult.token);
           localStorage.setItem("user", JSON.stringify(userCredential.user));
           localStorage.setItem("role", idTokenResult.claims.role);
+          localStorage.setItem("uid", userCredential.user.uid); // Stocke l'UID de l'utilisateur
           console.log("Connexion réussie");
           alert("Connexion réussie");
           window.location.pathname = "/"; // Redirige l'utilisateur vers la page d'accueil.
         });
       })
       .catch((error) => {
-        // Gère les erreurs de connexion.
         console.error("Erreur lors de la connexion", error);
         alert("Erreur lors de la connexion: " + error.message);
       });
   };
 
-  // Styles CSS pour le formulaire et ses éléments.
   const formStyle = {
     display: "flex",
     flexDirection: "column",
@@ -73,7 +67,6 @@ function Connexion() {
     marginTop: "20px",
   };
 
-  // Formulaire de connexion.
   return (
     <form onSubmit={connexion} style={formStyle}>
       <label style={labelStyle}>

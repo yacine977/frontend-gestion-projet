@@ -103,6 +103,10 @@ function NavBar() {
         <CustomLink to="/" className={styles.linkStyle}>
           Accueil
         </CustomLink>
+        
+        <CustomLink to="/liste-tache-utilisateur/:uid" className={styles.linkStyle}>
+          Mes Tâches
+        </CustomLink>
         {user ? (
           <>
             <LinksForRole role={role} />
