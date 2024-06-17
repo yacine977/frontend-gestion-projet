@@ -31,8 +31,15 @@ const ListeTacheUtilisateur = () => {
       <h2>Liste des Tâches</h2>
       <ul>
         {taches.map(tache => (
-          <li key={tache.tacheId}>
-            ID de la tâche: {tache.tacheId}
+          <li key={tache.id}>
+            <strong>ID de la tâche:</strong> {tache.id}<br />
+            <strong>Description:</strong> {tache.description}<br />
+            <strong>Priorité:</strong> {tache.priorite}<br />
+            <strong>Statut:</strong> {tache.statut}<br />
+            <strong>Date de début:</strong> {tache.dateDebut}<br />
+            <strong>Date de fin prévue:</strong> {tache.dateFinPrevu}<br />
+            <strong>Date de fin réelle:</strong> {tache.dateFinReel ? tache.dateFinReel : 'Non spécifiée'}<br />
+            <strong>ID du projet:</strong> {tache.projetId}
           </li>
         ))}
       </ul>
