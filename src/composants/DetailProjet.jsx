@@ -64,13 +64,11 @@ function DetailProjet() {
           Voir les réunions de ce projet
         </Link>
         
-        <Link to={`/taches-projet-utilisateur/${projet.id}`} className='button'>
-          Voir mes taches pour ce projet
-        </Link>
-
-
-        
-
+        {role === "UtilisateurStandard" && (
+          <Link to={`/taches-projet-utilisateur/${projet.id}`} className='button'>
+            Voir mes taches pour ce projet
+          </Link>
+        )}
       </div>
     </div>
   );
