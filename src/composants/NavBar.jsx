@@ -79,12 +79,12 @@ function UserSection({ user }) {
     </>
   ) : (
     <>
-      <CustomLink to="/inscription" className={styles.specialLinkStyle}>
-        Inscription
-      </CustomLink>
-      <CustomLink to="/connexion" className={styles.specialLinkStyle}>
-        Connexion
-      </CustomLink>
+      <CustomLink to="/inscription" className={`${styles.specialLinkStyle} ${styles.specialLinkStyleMargin}`}>
+    Inscription
+</CustomLink>
+<CustomLink to="/connexion" className={styles.specialLinkStyle}>
+    Connexion
+</CustomLink>
     </>
   );
 }

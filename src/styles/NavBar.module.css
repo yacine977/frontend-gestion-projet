@@ -36,3 +36,7 @@
     transform: scale(1.05);
     background-color: #6c757d; /* Gris moyen plus clair au survol */
 }
+
+.specialLinkStyleMargin {
+    margin-right: 20px; /* Ajoute une marge à droite */
+}
