@@ -140,6 +140,8 @@ function UserList() {
             <FontAwesomeIcon icon={faProjectDiagram} /> Voir les projets
             assignés
           </button>
+          {userRole === "AdministrateurInfrastructure" && (
+            <>
           <button
             className="updateButton"
             onClick={async () => {
@@ -210,6 +212,8 @@ function UserList() {
           >
             <FontAwesomeIcon icon={faTrashAlt} /> Supprimer
           </button>
+          </>
+          )}
         </div>
       ))}
     </div>
