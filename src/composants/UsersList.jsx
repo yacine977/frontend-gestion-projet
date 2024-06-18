@@ -75,19 +75,23 @@ function UserList() {
 
   const voirProjetsAssignes = async (uid) => {
     try {
-      const response = await fetch(`http://localhost:3000/projet/utilisateur/${uid}`);
+      const response = await fetch(
+        `http://localhost:3000/projet/utilisateur/${uid}`
+      );
       if (!response.ok) {
         throw new Error(`Erreur HTTP: ${response.status}`);
       }
       const projets = await response.json();
       // Étape 4 : Afficher les résultats
-      alert(`Projets assignés: ${projets.map(p => p.nom).join(', ')}`);
+      alert(`Projets assignés: ${projets.map((p) => p.nom).join(", ")}`);
     } catch (error) {
-      console.error("Erreur lors de la récupération des projets assignés :", error);
+      console.error(
+        "Erreur lors de la récupération des projets assignés :",
+        error
+      );
       alert("Une erreur est survenue. Veuillez réessayer.");
     }
   };
-
 
   return (
     <div className="userListContainer">
@@ -124,9 +128,13 @@ function UserList() {
           >
             <FontAwesomeIcon icon={faProjectDiagram} /> Assigner à un projet
           </button>
-          <button className="viewProjectsButton" onClick={() => voirProjetsAssignes(user.uid)}>
-  <FontAwesomeIcon icon={faProjectDiagram} /> Voir les projets assignés
-</button>
+          <button
+            className="viewProjectsButton"
+            onClick={() => voirProjetsAssignes(user.uid)}
+          >
+            <FontAwesomeIcon icon={faProjectDiagram} /> Voir les projets
+            assignés
+          </button>
           <button
             className="updateButton"
             onClick={async () => {
