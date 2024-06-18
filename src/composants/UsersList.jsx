@@ -127,6 +127,8 @@ function UserList() {
           </button>
           </>
           )}
+          {userRole === "PDG" && (
+            <>
           <button
             className="assignButton"
             onClick={() => assignerProjet(user.uid)}
@@ -140,6 +142,8 @@ function UserList() {
             <FontAwesomeIcon icon={faProjectDiagram} /> Voir les projets
             assignés
           </button>
+          </>
+          )}
           {userRole === "AdministrateurInfrastructure" && (
             <>
           <button
