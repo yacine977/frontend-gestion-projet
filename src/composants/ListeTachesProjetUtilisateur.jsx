@@ -58,15 +58,10 @@ const ListeTachesProjetUtilisateur = () => {
 
   return (
     <div className="container">
-      {" "}
-      {/* Étape 2: Utiliser la classe container */}
       <h2 className="title">Liste des Tâches pour le Projet {projetId}</h2>{" "}
-      {/* Étape 2: Utiliser la classe title */}
       <ul>
         {taches.map((tache) => (
           <li key={tache.id} className="tache">
-            {" "}
-            {/* Étape 2: Utiliser la classe tache */}
             <button onClick={() => terminerTache(tache.id)}>
               Terminer la tâche
             </button>
