@@ -11,6 +11,8 @@ import {
 
 function UserList() {
   const [users, setUsers] = useState([]);
+  const userRole = localStorage.getItem("role");
+  
 
   useEffect(() => {
     fetch("http://localhost:3000/utilisateur/allUsers")
@@ -101,6 +103,8 @@ function UserList() {
           <h2>{user.displayName}</h2>
           <p>Email: {user.email}</p>
           <p>UID: {user.uid}</p>
+          {userRole === "AdministrateurInfrastructure" && (
+            <>
           <select
             className="roleSelector"
             onChange={(e) => setRole(user.uid, e.target.value)}
@@ -121,7 +125,8 @@ function UserList() {
           >
             <FontAwesomeIcon icon={faUserCheck} /> Voir le rôle
           </button>
-
+          </>
+          )}
           <button
             className="assignButton"
             onClick={() => assignerProjet(user.uid)}
