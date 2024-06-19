@@ -32,6 +32,7 @@ function CreerReunion() {
       setSujet("");
       setDateTime("");
       setProjetId(initialProjetId || 0);
+      
       // Pas besoin de réinitialiser createurId ici car il est récupéré du localStorage
     } else {
       alert("Erreur lors de la création de la réunion");

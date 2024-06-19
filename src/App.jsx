@@ -27,6 +27,7 @@ import ReunionProjet from "./composants/ReunionProjet";
 import CreateUser from "./composants/CreateUser";
 import ListeTacheUtilisateur from "./composants/ListeTacheUtilisateur";
 import ListeTachesProjetUtilisateur from "./composants/ListeTachesProjetUtilisateur";
+import ReunionProjetUtilisateur from "./composants/ReunionProjetUtilisateur";
 
 function App() {
   // État local inutilisé, pourrait être supprimé si non utilisé dans le futur
@@ -74,6 +75,7 @@ function App() {
             element={<ListeTacheUtilisateur />}
           />
           <Route path="/taches-projet-utilisateur/:projetId" element={<ListeTachesProjetUtilisateur />} />
+          <Route path="/reunion-projet-utilisateur/:projetId" element={<ReunionProjetUtilisateur />} />
         </Routes>
       </div>
     </Router>

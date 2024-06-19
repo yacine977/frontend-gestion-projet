@@ -63,6 +63,9 @@ function DetailProjet() {
         <Link to={`/reunion-projet/${projet.id}`} className='button'>
           Voir les réunions de ce projet
         </Link>
+        <Link to={`/reunion-projet-utilisateur/${projet.id}`} className='button'>
+      Voir mes réunions pour ce projet
+    </Link>
         
         {role === "UtilisateurStandard" && (
           <Link to={`/taches-projet-utilisateur/${projet.id}`} className='button'>
