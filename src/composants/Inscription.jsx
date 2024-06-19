@@ -1,6 +1,7 @@
-// Importation des hooks et des fonctions nécessaires depuis React et Firebase
+// Importation des hooks et des fonctions nécessaires depuis React, Firebase et react-router-dom
 import React, { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom"; // Ajout de l'importation de useNavigate
 import app from "../firebase"; // Importation de la configuration Firebase
 
 // Composant Inscription pour l'enregistrement des utilisateurs
@@ -8,6 +9,7 @@ function Inscription() {
   // État local pour stocker l'email et le mot de passe de l'utilisateur
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate(); // Création de l'instance navigate
 
   // Fonction appelée lors de la soumission du formulaire
   const inscription = (e) => {
@@ -24,6 +26,7 @@ function Inscription() {
         // Inscription réussie
         console.log("Inscription réussie");
         alert("Inscription réussie");
+        navigate('/connexion'); // Redirection vers la page de connexion
       })
       .catch((error) => {
         // Gestion des erreurs d'inscription
@@ -31,6 +34,8 @@ function Inscription() {
         alert("Erreur lors de l'inscription: " + error.message);
       });
   };
+
+  
 
   // Styles CSS en JS pour les éléments du formulaire
   const formStyle = {
