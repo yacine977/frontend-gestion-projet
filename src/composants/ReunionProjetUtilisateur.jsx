@@ -3,8 +3,10 @@ import { useParams } from 'react-router-dom';
 
 function ReunionProjetUtilisateur() {
   const [reunions, setReunions] = useState([]);
+  const [participants, setParticipants] = useState({});
+  const [participantsVisibles, setParticipantsVisibles] = useState([]); // Nouvel état pour suivre les réunions visibles
   const { projetId } = useParams();
-  const createurId = localStorage.getItem("uid"); // Récupérer l'ID de l'utilisateur depuis le localStorage
+  const createurId = localStorage.getItem("uid");
 
   useEffect(() => {
     fetch(`http://localhost:3000/reunion/par-projet/${projetId}/${createurId}`)
@@ -15,9 +17,21 @@ function ReunionProjetUtilisateur() {
       .catch(error => console.error('Erreur:', error));
   }, [projetId, createurId]);
 
+  const toggleParticipants = (reunionId) => {
+    fetch(`http://localhost:3000/reunion/participation/${reunionId}`)
+      .then(response => response.json())
+      .then(data => {
+        setParticipants(prev => ({ ...prev, [reunionId]: data }));
+        setParticipantsVisibles(prev => 
+          prev.includes(reunionId) ? prev.filter(id => id !== reunionId) : [...prev, reunionId]
+        );
+      })
+      .catch(error => console.error('Erreur lors de la récupération des participants:', error));
+  };
+
   const ajouterParticipant = (reunionId) => {
-    const utilisateurId = prompt("Entrez l'ID de l'utilisateur à ajouter :"); // Utilisez une modal pour une meilleure expérience utilisateur
-    if (!utilisateurId) return; // Sortie si aucun ID n'est fourni
+    const utilisateurId = prompt("Entrez l'ID de l'utilisateur à ajouter :");
+    if (!utilisateurId) return;
 
     fetch('http://localhost:3000/reunion/ajouter-utilisateur', {
       method: 'POST',
@@ -29,7 +43,7 @@ function ReunionProjetUtilisateur() {
     .then(response => response.json())
     .then(data => {
       alert('Participant ajouté avec succès!');
-      // Vous pouvez ici rafraîchir la liste des réunions ou mettre à jour l'interface utilisateur comme nécessaire
+      toggleParticipants(reunionId); // Rafraîchir la liste des participants après l'ajout
     })
     .catch(error => {
       console.error('Erreur lors de l\'ajout du participant:', error);
@@ -46,6 +60,16 @@ function ReunionProjetUtilisateur() {
             <h3>{reunion.sujet}</h3>
             <p>Date et heure : {new Date(reunion.dateTime).toLocaleString('fr-FR')}</p>
             <button onClick={() => ajouterParticipant(reunion.id)}>Ajouter un participant</button>
+            <button onClick={() => toggleParticipants(reunion.id)}>
+              {participantsVisibles.includes(reunion.id) ? 'Cacher les participants' : 'Voir les participants'}
+            </button>
+            {participantsVisibles.includes(reunion.id) && participants[reunion.id] && (
+              <ul>
+                {participants[reunion.id].map(participant => (
+                  <li key={participant.utilisateurId}>{participant.utilisateurId}</li>
+                ))}
+              </ul>
+            )}
           </div>
         ))
       ) : (
