@@ -12,56 +12,47 @@ function CustomLink({ to, children, className }) {
 }
 
 // Génère des liens spécifiques en fonction du rôle de l'utilisateur
+
 function LinksForRole({ role }) {
-  switch (role) {
-    case "PDG":
-      return (
-        <>
-          <CustomLink to="/projets" className={styles.linkStyle}>
-            Projets
-          </CustomLink>
-          <CustomLink to="/creer-projet" className={styles.linkStyle}>
-            Créer un projet
-          </CustomLink>
-          <CustomLink to="/taches" className={styles.linkStyle}>
-            Tâches
-          </CustomLink>
-          <CustomLink to="/creer-tache" className={styles.linkStyle}>
-            Créer une tâche
-          </CustomLink>
-          <CustomLink to="/users" className={styles.linkStyle}>
-            Utilisateurs
-          </CustomLink>
-        </>
-      );
-    case "ChefDeProjet":
-    case "UtilisateurStandard": // Cas pour ChefDeProjet et UtilisateurStandard
-      return (
-        <>
-          <CustomLink to="/projets" className={styles.linkStyle}>
-            Projets
-          </CustomLink>
-        </>
-      );
-    case "AdministrateurInfrastructure":
-      return (
-        <>
-          <CustomLink to="/users" className={styles.linkStyle}>
-            Utilisateurs
-          </CustomLink>
-          <CustomLink to="/createUser" className={styles.linkStyle}>
-            Créer un utilisateur
-          </CustomLink>
-        </>
-      );
-    default:
-      return (
-        <>
-          <CustomLink to="/projets" className={styles.linkStyle}>
-            Projets
-          </CustomLink>
-        </>
-      );
+  // Affiche le lien "Projets" uniquement pour les rôles spécifiés
+  if (["PDG", "ChefDeProjet", "UtilisateurStandard"].includes(role)) {
+    return (
+      <>
+        <CustomLink to="/projets" className={styles.linkStyle}>
+          Projets
+        </CustomLink>
+        {role === "PDG" && (
+          <>
+            <CustomLink to="/creer-projet" className={styles.linkStyle}>
+              Créer un projet
+            </CustomLink>
+            <CustomLink to="/taches" className={styles.linkStyle}>
+              Tâches
+            </CustomLink>
+            <CustomLink to="/creer-tache" className={styles.linkStyle}>
+              Créer une tâche
+            </CustomLink>
+            <CustomLink to="/users" className={styles.linkStyle}>
+              Utilisateurs
+            </CustomLink>
+          </>
+        )}
+      </>
+    );
+  } else if (role === "AdministrateurInfrastructure") {
+    return (
+      <>
+        <CustomLink to="/users" className={styles.linkStyle}>
+          Utilisateurs
+        </CustomLink>
+        <CustomLink to="/createUser" className={styles.linkStyle}>
+          Créer un utilisateur
+        </CustomLink>
+      </>
+    );
+  } else {
+    // Pour les autres rôles, aucun lien spécifique n'est affiché
+    return null;
   }
 }
 
