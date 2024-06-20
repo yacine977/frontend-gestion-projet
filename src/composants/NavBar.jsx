@@ -14,6 +14,7 @@ function CustomLink({ to, children, className }) {
 // Génère des liens spécifiques en fonction du rôle de l'utilisateur
 
 // Dans la fonction LinksForRole, ajoutez le lien "Mes Notifications" pour les utilisateurs standard
+// Dans la fonction LinksForRole, ajoutez le lien "Envoyer un Message" pour les rôles PDG et ChefDeProjet
 function LinksForRole({ role }) {
   // Affiche le lien "Projets" uniquement pour les rôles spécifiés
   if (["PDG", "ChefDeProjet", "UtilisateurStandard"].includes(role)) {
@@ -36,7 +37,15 @@ function LinksForRole({ role }) {
             <CustomLink to="/users" className={styles.linkStyle}>
               Utilisateurs
             </CustomLink>
+            <CustomLink to="/send-message" className={styles.linkStyle}>
+              Envoyer un Message
+            </CustomLink>
           </>
+        )}
+        {role === "ChefDeProjet" && (
+          <CustomLink to="/send-message" className={styles.linkStyle}>
+            Envoyer un Message
+          </CustomLink>
         )}
         {role === "UtilisateurStandard" && (
           <CustomLink to="/notifications" className={styles.linkStyle}>
