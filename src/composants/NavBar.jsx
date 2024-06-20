@@ -99,24 +99,14 @@ function NavBar() {
       <h1 className={styles.linkStyle} style={{ flexGrow: 1 }}>
         Mon Application
       </h1>
-      <div>
+      <div style={{ display: 'flex', justifyContent: 'center', flexGrow: 2 }}>
         <CustomLink to="/" className={styles.linkStyle}>
           Accueil
         </CustomLink>
-
-
-        
-        {user ? (
-          <>
-            <LinksForRole role={role} />
-            <UserSection user={user} />
-          </>
-        ) : (
-          <UserSection />
-        )}
+        {user && <LinksForRole role={role} />}
       </div>
+      <UserSection user={user} />
     </nav>
   );
 }
-
 export default NavBar;
