@@ -15,7 +15,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 
-function TacheCard({ tache, onAssign, onDelete }) { // Ajout de onDelete dans les props
+function TacheCard({ tache, onAssign, onDelete }) {
   return (
     <Card sx={{ marginBottom: 2 }}>
       <CardContent>
@@ -45,7 +45,7 @@ function TacheCard({ tache, onAssign, onDelete }) { // Ajout de onDelete dans le
             >
               Supprimer
             </Button>
-          </Grid> {/* Correction de la fermeture de la balise Grid ici */}
+          </Grid>
           <Grid item>
             <Button
               startIcon={<AssignmentIcon />}
@@ -68,6 +68,7 @@ function TachesProjet() {
   const [afficherUtilisateurs, setAfficherUtilisateurs] = useState(false);
   const { projetId } = useParams();
   const [utilisateurSelectionne, setUtilisateurSelectionne] = useState("");
+
   const onDelete = (id) => {
     setTaches(currentTaches => currentTaches.filter(tache => tache.id !== id));
   };
@@ -92,6 +93,11 @@ function TachesProjet() {
   };
 
   const assignerTache = (tacheId) => {
+    console.log("Assigner tâche:", tacheId, "à l'utilisateur:", utilisateurSelectionne);
+    if (!utilisateurSelectionne) {
+      alert("Veuillez sélectionner un utilisateur avant d'assigner une tâche.");
+      return;
+    }
     fetch("http://localhost:3000/tache/assigner", {
       method: "POST",
       headers: {
@@ -120,19 +126,20 @@ function TachesProjet() {
       </Button>
       {afficherUtilisateurs && utilisateurs.length > 0 && (
         <FormControl fullWidth margin="normal">
-          <InputLabel id="utilisateur-select-label">
-            Sélectionner un utilisateur
-          </InputLabel>
+          <InputLabel id="utilisateur-select-label">Sélectionner un utilisateur</InputLabel>
           <Select
             labelId="utilisateur-select-label"
             id="utilisateur-select"
-            value={utilisateurSelectionne}
+            value={utilisateurSelectionne || ""}
             label="Sélectionner un utilisateur"
-            onChange={(e) => setUtilisateurSelectionne(e.target.value)}
+            onChange={(e) => {
+              console.log("Utilisateur sélectionné:", e.target.value);
+              setUtilisateurSelectionne(e.target.value);
+            }}
           >
-            {utilisateurs.map((utilisateur, index) => (
-              <MenuItem key={index} value={utilisateur.uid}>
-                {utilisateur.uid}
+            {utilisateurs.map((utilisateur) => (
+              <MenuItem key={utilisateur.utilisateurId} value={utilisateur.utilisateurId}>
+                {`${utilisateur.nom} ${utilisateur.prenom}`}
               </MenuItem>
             ))}
           </Select>
@@ -146,9 +153,9 @@ function TachesProjet() {
         </FormControl>
       )}
       <Grid container spacing={2}>
-        {taches.map((tache, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <TacheCard tache={tache} onAssign={assignerTache} onDelete={onDelete} /> {/* Passer onDelete ici */}
+        {taches.map((tache) => (
+          <Grid item xs={12} sm={6} md={4} key={tache.id}>
+            <TacheCard tache={tache} onAssign={assignerTache} onDelete={onDelete} />
           </Grid>
         ))}
       </Grid>
