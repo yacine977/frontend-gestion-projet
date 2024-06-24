@@ -1,0 +1,50 @@
+.send-message-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+}
+
+.send-message-form {
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 500px; /* Largeur fixe pour un meilleur contrôle du layout */
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px; /* Taille de police plus lisible */
+    box-sizing: border-box; /* Assure que padding et border sont inclus dans la largeur */
+}
+
+.btn-primary {
+    background-color: #0056b3;
+    border-color: #004085;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease; /* Transition douce pour le survol */
+}
+
+.btn-primary:hover {
+    background-color: #003865;
+}
