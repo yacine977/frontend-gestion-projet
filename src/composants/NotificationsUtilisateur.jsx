@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import moment from 'moment'; // Importez moment
+import moment from 'moment';
+import '../styles/NotificationsUtilisateur.css'; // Importez le fichier CSS ici
 
 function NotificationsUtilisateur() {
   const [notifications, setNotifications] = useState([]);
@@ -15,14 +16,13 @@ function NotificationsUtilisateur() {
   }, [utilisateurId]);
 
   return (
-    <div>
+    <div className="notifications-container">
       <h2>Vos notifications :</h2>
       {notifications.length > 0 ? (
         notifications.map((notification) => (
-          <div key={notification.id}>
+          <div key={notification.id} className="notification">
             <p>{notification.message}</p>
-            {/* Utilisez moment pour parser et formater la date */}
-            <p>Date: {moment(notification.date).locale('fr').format('LLLL')}</p>
+            <p className="notification-date">Date: {moment(notification.date).locale('fr').format('LLLL')}</p>
           </div>
         ))
       ) : (
