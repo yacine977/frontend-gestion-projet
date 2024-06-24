@@ -80,6 +80,8 @@ function ReunionProjetUtilisateur() {
       });
   };
 
+  
+
   return (
     <div>
       <h2>Mes réunions pour ce projet :</h2>
@@ -91,14 +93,17 @@ function ReunionProjetUtilisateur() {
               Date et heure :{" "}
               {new Date(reunion.dateTime).toLocaleString("fr-FR")}
             </p>
-            <button onClick={() => ajouterParticipant(reunion.id)}>
-              Ajouter un participant
-            </button>
-            <button onClick={() => toggleParticipants(reunion.id)}>
-              {participantsVisibles.includes(reunion.id)
-                ? "Cacher les participants"
-                : "Voir les participants"}
-            </button>
+            <button
+  onClick={() => ajouterParticipant(reunion.id)}
+  style={{ marginRight: "10px" }} // Ajoutez cette ligne pour ajouter de l'espace
+>
+  Ajouter un participant
+</button>
+<button onClick={() => toggleParticipants(reunion.id)}>
+  {participantsVisibles.includes(reunion.id)
+    ? "Cacher les participants"
+    : "Voir les participants"}
+</button>
             {participantsVisibles.includes(reunion.id) &&
               participants[reunion.id] && (
                 <ul>
