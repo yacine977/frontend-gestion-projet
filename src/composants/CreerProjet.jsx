@@ -1,6 +1,7 @@
 // Importation des hooks et des styles nécessaires
 import { useState } from "react";
 import "../styles/ProjetForm.css";
+import { useNavigate } from "react-router-dom";
 
 // Composant pour créer un nouveau projet
 function CreerProjet() {
@@ -10,6 +11,7 @@ function CreerProjet() {
   const [dateDebut, setDateDebut] = useState("");
   const [dateFinPrevu, setDateFinPrevu] = useState("");
   const [dateFinReel, setDateFinReel] = useState("");
+  const navigate = useNavigate(); 
 
   // Gestionnaire de soumission du formulaire
   const handleSubmit = async (event) => {
@@ -58,6 +60,7 @@ function CreerProjet() {
     // Gestion de la réponse du serveur
     if (response.ok) {
       alert("Projet créé avec succès");
+      navigate('/projets'); 
       // Réinitialisation des champs du formulaire
       setNom("");
       setDescription("");
