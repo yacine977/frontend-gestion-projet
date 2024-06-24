@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import "../styles/CreerReunion.css"; // Importez votre fichier CSS ici
 
 function CreerReunion() {
   const [sujet, setSujet] = useState("");
@@ -32,49 +33,51 @@ function CreerReunion() {
       setSujet("");
       setDateTime("");
       setProjetId(initialProjetId || 0);
-      
-      // Pas besoin de réinitialiser createurId ici car il est récupéré du localStorage
     } else {
       alert("Erreur lors de la création de la réunion");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
+    <form onSubmit={handleSubmit} className="form-reunion">
+      <label className="label">
         Sujet:
         <input
           type="text"
           value={sujet}
           onChange={(e) => setSujet(e.target.value)}
+          className="input"
         />
       </label>
-      <label>
+      <label className="label">
         Date et heure:
         <input
           type="datetime-local"
           value={dateTime}
           onChange={(e) => setDateTime(e.target.value)}
+          className="input"
         />
       </label>
-      <label>
+      <label className="label">
         ID du projet:
         <input
           type="number"
           value={projetId}
           onChange={(e) => setProjetId(e.target.value)}
+          className="input"
         />
       </label>
-      <label>
+      <label className="label">
         ID du créateur:
         <input
           type="text"
           value={createurId}
           onChange={(e) => setCreateurId(e.target.value)}
           readOnly // Ce champ est en lecture seule car la valeur est pré-remplie
+          className="input"
         />
       </label>
-      <button type="submit">Créer une réunion</button>
+      <button type="submit" className="button-submit">Créer une réunion</button>
     </form>
   );
 }

@@ -76,8 +76,14 @@ function App() {
             path="/liste-tache-utilisateur/:uid"
             element={<ListeTacheUtilisateur />}
           />
-          <Route path="/taches-projet-utilisateur/:projetId" element={<ListeTachesProjetUtilisateur />} />
-          <Route path="/reunion-projet-utilisateur/:projetId" element={<ReunionProjetUtilisateur />} />
+          <Route
+            path="/taches-projet-utilisateur/:projetId"
+            element={<ListeTachesProjetUtilisateur />}
+          />
+          <Route
+            path="/reunion-projet-utilisateur/:projetId"
+            element={<ReunionProjetUtilisateur />}
+          />
           <Route path="/notifications" element={<NotificationsUtilisateur />} />
           <Route path="/send-message" element={<SendMessageForm />} />
         </Routes>

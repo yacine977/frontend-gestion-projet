@@ -1,7 +1,8 @@
 // Importation des hooks et styles nécessaires
 import { useState } from "react";
 import "../styles/CreerTache.css";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
+
 
 // Composant pour créer une nouvelle tâche
 function CreerTache() {
@@ -15,6 +16,7 @@ function CreerTache() {
   // Récupération de l'ID du projet depuis l'URL
   const { projetId: initialProjetId } = useParams();
   const [projetId, setProjetId] = useState(initialProjetId || 0);
+  const navigate = useNavigate();
 
   // Gestionnaire de soumission du formulaire
   const handleSubmit = async (event) => {
@@ -68,6 +70,7 @@ function CreerTache() {
     // Gestion de la réponse du serveur
     if (response.ok) {
       alert("Tâche créée avec succès");
+      navigate(`/taches-projet/${projetId}`);
       // Réinitialisation des champs du formulaire
       setDescription("");
       setPriorite(0);
