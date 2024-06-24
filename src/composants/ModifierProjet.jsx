@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import "../styles/ProjetForm.css";
 
 // Composant pour modifier les détails d'un projet existant
@@ -12,6 +12,8 @@ function ModifierProjet() {
   const [dateDebut, setDateDebut] = useState("");
   const [dateFinPrevu, setDateFinPrevu] = useState("");
   const [dateFinReel, setDateFinReel] = useState("");
+  const navigate = useNavigate();
+
 
   // Charger les détails du projet au montage du composant
   useEffect(() => {
@@ -95,6 +97,7 @@ function ModifierProjet() {
     // Gestion de la réponse
     if (response.ok) {
       alert("Projet modifié avec succès");
+      navigate("/projets");
     } else {
       alert("Erreur lors de la modification du projet");
     }

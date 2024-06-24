@@ -7,6 +7,7 @@ function ListeDesProjets() {
   const user = JSON.parse(localStorage.getItem("user"));
   const role = localStorage.getItem("role");
   console.log(user);
+  
 
   useEffect(() => {
     fetch("http://localhost:3000/projet")
