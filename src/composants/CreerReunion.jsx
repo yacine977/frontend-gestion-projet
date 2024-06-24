@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import "../styles/CreerReunion.css"; // Importez votre fichier CSS ici
 
 function CreerReunion() {
@@ -8,6 +8,7 @@ function CreerReunion() {
   const [createurId, setCreateurId] = useState("");
   const { projetId: initialProjetId } = useParams();
   const [projetId, setProjetId] = useState(initialProjetId || 0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Récupération de l'ID du créateur depuis le localStorage
@@ -30,6 +31,7 @@ function CreerReunion() {
 
     if (response.ok) {
       alert("Réunion créée avec succès");
+      navigate(`/reunion-projet-utilisateur/${projetId}`);
       setSujet("");
       setDateTime("");
       setProjetId(initialProjetId || 0);
