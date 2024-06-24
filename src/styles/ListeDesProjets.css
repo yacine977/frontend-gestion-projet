@@ -1,34 +1,54 @@
+/* Améliorations des styles globaux pour ListeDesProjets */
 .liste-projets {
     padding: 20px;
-    background-color: #f5f5f5;
+    background-color: #f9f9f9; /* Utilisation d'un fond plus doux */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Police moderne */
+    color: #333; /* Couleur de texte optimisée pour le contraste */
 }
 
 .projet {
     margin-bottom: 20px;
     padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #fff;
+    border: 1px solid #e0e0e0; /* Bordure subtile */
+    border-radius: 8px; /* Bordures arrondies pour un look moderne */
+    background-color: #ffffff;
+    background-image: linear-gradient(to right top, #ffffff, #f8f8f8); /* Effet de gradient subtil */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08); /* Ombres plus profondes pour une sensation de profondeur */
+    transition: transform 0.3s ease-in-out, box-shadow 0.2s ease-in-out; /* Transitions plus fluides */
+}
+
+.projet:hover {
+    transform: translateY(-5px); /* Effet de lévitation au survol */
+    box-shadow: 0 10px 15px rgba(0,0,0,0.2), 0 2px 5px rgba(0,0,0,0.1); /* Ombre plus prononcée au survol */
 }
 
 .actions {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 20px; /* Espacement optimisé */
 }
 
-.modifier, .supprimer {
+/* Ajout de styles pour les boutons avec des effets de gradient et des transitions douces */
+.modifier, .supprimer, button {
     margin-right: 10px;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+    background-image: linear-gradient(to right, #2196F3, #21CBF3); /* Gradient bleu */
+    color: white;
+}
+
+.modifier:hover, .supprimer:hover, button:hover {
+    transform: scale(1.05); /* Légère augmentation de taille au survol */
+}
+
+/* Styles spécifiques pour les boutons modifier et supprimer */
+.modifier {
+    background-image: linear-gradient(to right, #4CAF50, #67D67E); /* Gradient vert */
 }
 
 .supprimer {
-    color: #fff;
-    background-color: #f44336;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.supprimer:hover {
-    background-color: #d32f2f;
+    background-image: linear-gradient(to right, #f44336, #f6685e); /* Gradient rouge */
 }
