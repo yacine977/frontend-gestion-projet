@@ -27,11 +27,13 @@ function ProjectDocuments() {
       <h1>Documents du projet {projetId}</h1>
       {documents.map((document) => (
         <div key={document.id}>
+          
           <h2>{document.nom}</h2>
           <p>Type: {document.type}</p>
           <p>Chemin d'accès: {document.cheminAcces}</p>
           <p>ID de l'utilisateur: {document.utilisateurId}</p>
           <p>ID du projet: {document.projetId}</p>
+
         </div>
       ))}
     </div>

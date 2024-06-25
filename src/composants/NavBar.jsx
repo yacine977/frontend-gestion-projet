@@ -34,6 +34,13 @@ function LinksForRole({ role }) {
             <CustomLink to="/creer-tache" className={styles.linkStyle}>
               Créer une tâche
             </CustomLink>
+            //liste des documents
+            <CustomLink to="/documents" className={styles.linkStyle}>
+              Documents
+            </CustomLink>
+            <CustomLink to="/creer-document" className={styles.linkStyle}>
+              Créer un document
+            </CustomLink>
             <CustomLink to="/users" className={styles.linkStyle}>
               Utilisateurs
             </CustomLink>

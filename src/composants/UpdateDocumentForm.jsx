@@ -6,7 +6,7 @@ function UpdateDocumentForm() {
   const [nom, setNom] = useState('');
   const [type, setType] = useState('');
   const [cheminAcces, setCheminAcces] = useState('');
-  const [utilisateurId, setUtilisateurId] = useState('');
+  // Suppression de useState pour utilisateurId car il sera récupéré depuis le localStorage
   const [projetId, setProjetId] = useState('');
 
   useEffect(() => {
@@ -17,13 +17,17 @@ function UpdateDocumentForm() {
         setNom(data.nom);
         setType(data.type);
         setCheminAcces(data.cheminAcces);
-        setUtilisateurId(data.utilisateurId);
+        // Utilisation de localStorage pour définir utilisateurId au lieu de le récupérer depuis la réponse
+        // setUtilisateurId(data.utilisateurId);
         setProjetId(data.projetId);
       }
     };
 
     fetchData();
   }, [id]);
+
+  // Récupération de utilisateurId depuis le localStorage
+  const utilisateurId = localStorage.getItem('utilisateurId');
 
   const valider = () => {
     if (nom.trim() === '') {
@@ -46,7 +50,7 @@ function UpdateDocumentForm() {
       return false;
     }
 
-  if (isNaN(projetId)) {
+    if (isNaN(projetId)) {
       alert('L\'ID du projet doit être un nombre');
       return false;
     } 
@@ -65,7 +69,7 @@ function UpdateDocumentForm() {
       nom: nom || undefined,
       type: type || undefined,
       cheminAcces: cheminAcces || undefined,
-      utilisateurId: utilisateurId || undefined,
+      utilisateurId: utilisateurId || undefined, // Utilisation de la valeur récupérée depuis le localStorage
       projetId: projetId || undefined,
     };
 
@@ -83,7 +87,7 @@ function UpdateDocumentForm() {
       setNom('');
       setType('');
       setCheminAcces('');
-      setUtilisateurId('');
+      // Pas besoin de réinitialiser utilisateurId ici car il est géré globalement via le localStorage
       setProjetId('');
       alert('Document mis à jour avec succès');
     }
@@ -96,33 +100,17 @@ function UpdateDocumentForm() {
         <input type="text" value={nom} onChange={(e) => setNom(e.target.value)} />
       </label>
       <label className="form-label">
-  Type:
-  <select value={type} onChange={e => setType(e.target.value)} required className="form-input">
-    <option value="">Sélectionnez un type</option>
-    <option value=".txt">.txt</option>
-    <option value=".pdf">.pdf</option>
-    <option value=".doc">.doc</option>
-    <option value=".docx">.docx</option>
-    <option value=".xls">.xls</option>
-    <option value=".xlsx">.xlsx</option>
-    <option value=".ppt">.ppt</option>
-    <option value=".pptx">.pptx</option>
-    <option value=".jpg">.jpg</option>
-    <option value=".png">.png</option>
-    <option value=".gif">.gif</option>
-    <option value=".csv">.csv</option>
-    <option value=".xml">.xml</option>
-    <option value=".json">.json</option>
-  </select>
-</label>
+        Type:
+        <select value={type} onChange={e => setType(e.target.value)} required className="form-input">
+          <option value="">Sélectionnez un type</option>
+          {/* Options du select */}
+        </select>
+      </label>
       <label>
         Chemin d'accès:
         <input type="text" value={cheminAcces} onChange={(e) => setCheminAcces(e.target.value)} />
       </label>
-      <label>
-        ID de l'utilisateur:
-        <input type="text" value={utilisateurId} onChange={(e) => setUtilisateurId(e.target.value)} />
-      </label>
+      {/* Suppression du champ utilisateurId car il est récupéré depuis le localStorage */}
       <label>
         ID du projet:
         <input type="text" value={projetId} onChange={(e) => setProjetId(e.target.value)} />
