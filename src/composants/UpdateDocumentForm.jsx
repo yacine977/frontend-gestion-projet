@@ -24,7 +24,7 @@ function UpdateDocumentForm() {
     fetchData();
   }, [id]);
 
-  const utilisateurId = localStorage.getItem('utilisateurId');
+  const utilisateurId = localStorage.getItem('uid');
 
   const valider = () => {
     if (nom.trim() === '') {
@@ -42,10 +42,7 @@ function UpdateDocumentForm() {
       return false;
     }
 
-    if (isNaN(utilisateurId)) {
-      alert('L\'ID de l\'utilisateur doit être un nombre');
-      return false;
-    }
+   
 
     if (isNaN(projetId)) {
       alert('L\'ID du projet doit être un nombre');
@@ -108,6 +105,10 @@ function UpdateDocumentForm() {
       <label>
         Chemin d'accès:
         <input type="text" value={cheminAcces} onChange={(e) => setCheminAcces(e.target.value)} />
+      </label>
+      <label>
+        ID de l'utilisateur:
+        <input type="text" value={utilisateurId} readOnly />
       </label>
       <label>
         ID du projet:
