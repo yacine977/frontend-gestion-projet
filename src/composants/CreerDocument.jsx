@@ -54,7 +54,7 @@ function CreerDocument() {
     });
     if (response.ok) {
       alert("Document créé avec succès");
-      navigate("/documents");
+      navigate(`/documents-projet/${projetId}`);
       setNom("");
       setType("");
       setCheminAcces("");
