@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function ProjectDocuments() {
   const [documents, setDocuments] = useState([]);
@@ -55,6 +56,9 @@ function ProjectDocuments() {
           <p>ID de l'utilisateur: {document.utilisateurId}</p>
           <p>ID du projet: {document.projetId}</p>
           <button onClick={() => supprimerDocument(document.documentId)}>Supprimer</button>
+          <Link to={`/UpdateDocumentForm/${document.documentId}`} className="document-update-button">
+            Modifier
+          </Link>
         </div>
       ))}
     </div>
