@@ -79,7 +79,7 @@ function UpdateDocumentForm() {
       const responseData = await response.json();
       console.log(responseData);
       alert('Document mis à jour avec succès');
-      navigate('/documents');
+      navigate(`/documents-projet/${projetId}`);
       // Réinitialisation des états après la mise à jour
       setNom('');
       setType('');
