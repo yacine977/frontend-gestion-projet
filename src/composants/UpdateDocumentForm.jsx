@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 function UpdateDocumentForm() {
   const { id } = useParams();
   const [nom, setNom] = useState('');
   const [type, setType] = useState('');
   const [cheminAcces, setCheminAcces] = useState('');
-  // Suppression de useState pour utilisateurId car il sera récupéré depuis le localStorage
   const [projetId, setProjetId] = useState('');
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,8 +17,6 @@ function UpdateDocumentForm() {
         setNom(data.nom);
         setType(data.type);
         setCheminAcces(data.cheminAcces);
-        // Utilisation de localStorage pour définir utilisateurId au lieu de le récupérer depuis la réponse
-        // setUtilisateurId(data.utilisateurId);
         setProjetId(data.projetId);
       }
     };
@@ -26,7 +24,6 @@ function UpdateDocumentForm() {
     fetchData();
   }, [id]);
 
-  // Récupération de utilisateurId depuis le localStorage
   const utilisateurId = localStorage.getItem('utilisateurId');
 
   const valider = () => {
@@ -66,11 +63,11 @@ function UpdateDocumentForm() {
     }
 
     const data = {
-      nom: nom || undefined,
-      type: type || undefined,
-      cheminAcces: cheminAcces || undefined,
-      utilisateurId: utilisateurId || undefined, // Utilisation de la valeur récupérée depuis le localStorage
-      projetId: projetId || undefined,
+      nom: nom,
+      type: type,
+      cheminAcces: cheminAcces,
+      utilisateurId: utilisateurId, // Utilisation de la valeur récupérée depuis le localStorage
+      projetId: projetId,
     };
 
     const response = await fetch(`http://localhost:3000/document/${id}`, {
@@ -84,12 +81,13 @@ function UpdateDocumentForm() {
     if (response.ok) {
       const responseData = await response.json();
       console.log(responseData);
+      alert('Document mis à jour avec succès');
+      navigate('/documents');
+      // Réinitialisation des états après la mise à jour
       setNom('');
       setType('');
       setCheminAcces('');
-      // Pas besoin de réinitialiser utilisateurId ici car il est géré globalement via le localStorage
       setProjetId('');
-      alert('Document mis à jour avec succès');
     }
   };
 
@@ -103,14 +101,14 @@ function UpdateDocumentForm() {
         Type:
         <select value={type} onChange={e => setType(e.target.value)} required className="form-input">
           <option value="">Sélectionnez un type</option>
-          {/* Options du select */}
+          <option value=".txt">.txt</option>
+          <option value=".pdf">.pdf</option>
         </select>
       </label>
       <label>
         Chemin d'accès:
         <input type="text" value={cheminAcces} onChange={(e) => setCheminAcces(e.target.value)} />
       </label>
-      {/* Suppression du champ utilisateurId car il est récupéré depuis le localStorage */}
       <label>
         ID du projet:
         <input type="text" value={projetId} onChange={(e) => setProjetId(e.target.value)} />
