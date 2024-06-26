@@ -67,7 +67,7 @@ function UserList() {
 };
 
 const afficherEtChoisirProjet = async (projets) => {
-  let message = "Choisissez un projet:\n";
+  let message = "Sélectionnez un projet à assigner en entrant son ID:\n";
   projets.forEach((projet, index) => {
     message += `${index + 1}. ${projet.nom}\n`;
   });
