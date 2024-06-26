@@ -41,36 +41,40 @@ function UserList() {
     alert(data.message);
   };
 
-  const assignerProjet = async (utilisateurId) => {
-    const idProjet = prompt("Entrez l'ID du projet à assigner:");
-    if (idProjet) {
-      try {
-        const response = await fetch(
-          `http://localhost:3000/projet/${idProjet}/assigner`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ uid: utilisateurId }), // Modification ici pour correspondre au back-end
-          }
-        );
-        if (!response.ok) {
-          throw new Error(`Erreur HTTP: ${response.status}`);
-        }
-        const data = await response.json();
-        alert(
-          `Utilisateur assigné au projet avec succès. ID de l'assignation: ${data.insertId}`
-        );
-      } catch (error) {
-        console.error(
-          "Erreur lors de l'assignation de l'utilisateur au projet :",
-          error
-        );
-        alert("Une erreur est survenue. Veuillez réessayer.");
+ const assignerProjet = async (utilisateurId) => {
+  try {
+    const projets = await fetch("http://localhost:3000/projet")
+      .then((response) => response.json());
+    const choixProjet = await afficherEtChoisirProjet(projets);
+    if (choixProjet) {
+      const response = await fetch(`http://localhost:3000/projet/${choixProjet}/assigner`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ uid: utilisateurId }),
+      });
+      if (!response.ok) {
+        throw new Error(`Erreur HTTP: ${response.status}`);
       }
+      const data = await response.json();
+      alert(`Utilisateur assigné au projet avec succès. ID de l'assignation: ${data.insertId}`);
     }
-  };
+  } catch (error) {
+    console.error("Erreur lors de l'assignation de l'utilisateur au projet :", error);
+    alert("Une erreur est survenue. Veuillez réessayer.");
+  }
+};
+
+const afficherEtChoisirProjet = async (projets) => {
+  let message = "Choisissez un projet:\n";
+  projets.forEach((projet, index) => {
+    message += `${index + 1}. ${projet.nom}\n`;
+  });
+  const choix = prompt(message);
+  const projetChoisi = projets[choix - 1];
+  return projetChoisi ? projetChoisi.id : null;
+};
 
   const voirProjetsAssignes = async (utilisateurId) => {
     try {
