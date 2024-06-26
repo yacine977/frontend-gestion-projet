@@ -3,9 +3,12 @@ import styles from "../styles/CreateUser.module.css"; // Importation des styles 
 
 // Composant pour créer un nouvel utilisateur
 function CreateUser() {
-  // État pour stocker l'email, le mot de passe et les messages de l'utilisateur
+  // État pour stocker les informations de l'utilisateur
+  const [nom, setNom] = useState("");
+  const [prenom, setPrenom] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [telephone, setTelephone] = useState("");
+  const [motDePasse, setMotDePasse] = useState("");
   const [message, setMessage] = useState("");
 
   // Gère la soumission du formulaire
@@ -20,7 +23,7 @@ function CreateUser() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email, password }), // Corps de la requête avec email et mot de passe
+          body: JSON.stringify({ nom, prenom, email, telephone, motDePasse }), // Corps de la requête avec les informations de l'utilisateur
         }
       );
 
@@ -29,13 +32,21 @@ function CreateUser() {
       }
 
       const user = await response.json(); // Récupère la réponse du serveur
-      setMessage(`Utilisateur créé : ${user.email}`); // Affiche un message de succès
-      setEmail(""); // Réinitialise l'email
-      setPassword(""); // Réinitialise le mot de passe
+      setMessage(`Utilisateur créé : ${user.firebaseUser.email}`); // Affiche un message de succès
+      // Réinitialise les champs
+      setNom("");
+      setPrenom("");
+      setEmail("");
+      setTelephone("");
+      setMotDePasse("");
     } catch (error) {
       setMessage(`Erreur : ${error.message}`); // Affiche un message d'erreur
-      setEmail(""); // Optionnel : Réinitialise l'email même en cas d'erreur
-      setPassword(""); // Optionnel : Réinitialise le mot de passe même en cas d'erreur
+      // Optionnel : Réinitialise les champs même en cas d'erreur
+      setNom("");
+      setPrenom("");
+      setEmail("");
+      setTelephone("");
+      setMotDePasse("");
     }
   };
 
@@ -45,11 +56,41 @@ function CreateUser() {
       <h2>Créer un nouvel utilisateur</h2>
       <form onSubmit={handleSubmit} className={styles.form}>
         <div>
+          <label>Nom :</label>
+          <input
+            type="text"
+            value={nom}
+            onChange={(e) => setNom(e.target.value)}
+            required
+            className={styles.input}
+          />
+        </div>
+        <div>
+          <label>Prénom :</label>
+          <input
+            type="text"
+            value={prenom}
+            onChange={(e) => setPrenom(e.target.value)}
+            required
+            className={styles.input}
+          />
+        </div>
+        <div>
           <label>Email :</label>
           <input
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)} // Met à jour l'email à chaque changement
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className={styles.input}
+          />
+        </div>
+        <div>
+          <label>Téléphone :</label>
+          <input
+            type="text"
+            value={telephone}
+            onChange={(e) => setTelephone(e.target.value)}
             required
             className={styles.input}
           />
@@ -58,8 +99,8 @@ function CreateUser() {
           <label>Mot de passe :</label>
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)} // Met à jour le mot de passe à chaque changement
+            value={motDePasse}
+            onChange={(e) => setMotDePasse(e.target.value)}
             required
             className={styles.input}
           />
@@ -68,8 +109,7 @@ function CreateUser() {
           Créer
         </button>
       </form>
-      {message && <p className={styles.message}>{message}</p>} // Affiche un
-      message de retour
+      {message && <p className={styles.message}>{message}</p>} 
     </div>
   );
 }
