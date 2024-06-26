@@ -85,7 +85,7 @@ const afficherEtChoisirProjet = async (projets) => {
         throw new Error(`Erreur HTTP: ${response.status}`);
       }
       const projets = await response.json();
-      alert(`Projets assignés: ${projets.map((p) => p.nom).join(", ")}`);
+      alert(`Projets assignés: \n${projets.map((p) => p.nom).join(",\n")}`);
     } catch (error) {
       console.error(
         "Erreur lors de la récupération des projets assignés :",
