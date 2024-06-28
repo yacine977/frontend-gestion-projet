@@ -1,12 +1,13 @@
+/* CSS préfixé */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-.userListContainer {
+.ul_userListContainer {
     font-family: 'Roboto', sans-serif;
     margin: 20px auto;
     width: 80%;
 }
 
-.userCard {
+.ul_userCard {
     background-color: #ffffff;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     border-radius: 10px;
@@ -15,15 +16,15 @@
     transition: transform 0.3s ease;
 }
 
-.userCard:hover {
+.ul_userCard:hover {
     transform: translateY(-5px);
 }
 
-.userCard h2, .userCard p {
+.ul_userCard h2, .ul_userCard p {
     margin: 10px 0;
 }
 
-.roleSelector, .roleButton, .assignButton {
+.ul_roleSelector, .ul_roleButton, .ul_assignButton {
     display: block;
     margin: 10px 0;
     padding: 10px;
@@ -35,10 +36,34 @@
     transition: background-color 0.3s ease;
 }
 
-.roleButton:hover, .assignButton:hover {
+.ul_roleButton:hover, .ul_assignButton:hover {
     background-color: #0056b3;
 }
 
-.buttonMarginRight {
-    margin-right: 10px; /* Ajustez la valeur selon vos besoins */
+.ul_buttonMarginRight {
+    margin-right: 10px;
+}
+
+.ul_roleButton {
+    background-color: #007bff;
+}
+
+.ul_assignButton {
+    background-color: #28a745;
+}
+
+.ul_viewProjectsButton {
+    background-color: #17a2b8;
+}
+
+.ul_updateButton {
+    background-color: #ffc107;
+}
+
+.ul_deleteButton {
+    background-color: #dc3545;
+}
+
+.ul_roleButton:hover, .ul_assignButton:hover, .ul_viewProjectsButton:hover, .ul_updateButton:hover, .ul_deleteButton:hover {
+    opacity: 0.8;
 }

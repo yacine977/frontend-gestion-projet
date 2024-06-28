@@ -30,6 +30,7 @@ import ListeTachesProjetUtilisateur from "./composants/ListeTachesProjetUtilisat
 import ReunionProjetUtilisateur from "./composants/ReunionProjetUtilisateur";
 import NotificationsUtilisateur from "./composants/NotificationsUtilisateur";
 import SendMessageForm from "./composants/SendMessageForm";
+import ListeDesProjetsAssignes from "./composants/ListeDesProjetsAssignes";
 
 function App() {
   // État local inutilisé, pourrait être supprimé si non utilisé dans le futur
@@ -86,6 +87,10 @@ function App() {
           />
           <Route path="/notifications" element={<NotificationsUtilisateur />} />
           <Route path="/send-message" element={<SendMessageForm />} />
+          <Route
+            path="/projets-assignes"
+            element={<ListeDesProjetsAssignes />}
+          />
         </Routes>
       </div>
     </Router>

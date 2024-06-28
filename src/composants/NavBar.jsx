@@ -20,11 +20,12 @@ function LinksForRole({ role }) {
   if (["PDG", "ChefDeProjet", "UtilisateurStandard"].includes(role)) {
     return (
       <>
-        <CustomLink to="/projets" className={styles.linkStyle}>
-          Projets
-        </CustomLink>
+        
         {role === "PDG" && (
           <>
+          <CustomLink to="/projets" className={styles.linkStyle}>
+          Projets
+        </CustomLink>
             <CustomLink to="/creer-projet" className={styles.linkStyle}>
               Créer un projet
             </CustomLink>
@@ -48,6 +49,11 @@ function LinksForRole({ role }) {
               Envoyer un Message
             </CustomLink>
           </>
+        )}
+         {(role === "ChefDeProjet" || role === "UtilisateurStandard") && (
+          <CustomLink to="/projets-assignes" className={styles.linkStyle}>
+            Mes projets assignés
+          </CustomLink>
         )}
         {role === "ChefDeProjet" && (
           <CustomLink to="/send-message" className={styles.linkStyle}>
