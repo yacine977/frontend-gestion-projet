@@ -7,8 +7,8 @@ function Inscription() {
   const [email, setEmail] = useState('');
   const [telephone, setTelephone] = useState('');
   const [motDePasse, setMotDePasse] = useState('');
+  const [erreur, setErreur] = useState({ nom: '', prenom: '', email: '', telephone: '', motDePasse: '' });
   const navigate = useNavigate();
-
 
   const formStyle = {
     display: 'flex',
@@ -36,8 +36,39 @@ function Inscription() {
     cursor: 'pointer',
   };
 
+  const validateForm = () => {
+    let isValid = true;
+    let errors = { nom: '', prenom: '', email: '', telephone: '', motDePasse: '' };
+
+    if (nom.length < 2) {
+      errors.nom = 'Le nom doit contenir au moins 2 caractères.';
+      isValid = false;
+    }
+    if (prenom.length < 2) {
+      errors.prenom = 'Le prénom doit contenir au moins 2 caractères.';
+      isValid = false;
+    }
+    if (!email.includes('@')) {
+      errors.email = 'L\'email doit être valide.';
+      isValid = false;
+    }
+    if (telephone.length < 10) {
+      errors.telephone = 'Le numéro de téléphone doit contenir au moins 10 chiffres.';
+      isValid = false;
+    }
+    if (motDePasse.length < 6) {
+      errors.motDePasse = 'Le mot de passe doit contenir au moins 6 caractères.';
+      isValid = false;
+    }
+
+    setErreur(errors);
+    return isValid;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) return; // Arrête la soumission si la validation échoue
+
     try {
       const response = await fetch('http://localhost:3000/utilisateur/createUser', {
         method: 'POST',
@@ -73,6 +104,11 @@ function Inscription() {
       <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required style={inputStyle} />
       <input type="tel" value={telephone} onChange={(e) => setTelephone(e.target.value)} placeholder="Téléphone" required style={inputStyle} />
       <input type="password" value={motDePasse} onChange={(e) => setMotDePasse(e.target.value)} placeholder="Mot de passe" required style={inputStyle} />
+      {Object.values(erreur).some(e => e) && (
+        <div style={{color: 'red'}}>
+          {Object.entries(erreur).map(([key, value]) => value && <p key={key}>{value}</p>)}
+        </div>
+      )}
       <button type="submit" style={buttonStyle}>S'inscrire</button>
     </form>
   );
