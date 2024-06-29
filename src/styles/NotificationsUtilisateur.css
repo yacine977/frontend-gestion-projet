@@ -20,3 +20,63 @@
     font-style: italic;
     color: #666;
 }
+
+.notifications-container {
+    padding: 20px;
+  }
+  
+  .notification {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  .new-notification-badge {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .notification.new {
+    background-color: #e6f7ff;
+  }
+  
+  .btn {
+    margin-top: 20px;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  
+  .pagination button.active {
+    background-color: #0056b3;
+  }
+  
+  .pagination button:hover {
+    background-color: #0056b3;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 16px; /* Ajustez la taille du padding selon votre préférence */
+    border-radius: 4px;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+  

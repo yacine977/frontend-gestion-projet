@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "../styles/NavBar.module.css";
 
-// Composant pour créer des liens personnalisés avec le style et la navigation
 function CustomLink({ to, children, className }) {
   return (
     <Link to={to} className={className}>
@@ -11,21 +10,15 @@ function CustomLink({ to, children, className }) {
   );
 }
 
-// Génère des liens spécifiques en fonction du rôle de l'utilisateur
-
-// Dans la fonction LinksForRole, ajoutez le lien "Mes Notifications" pour les utilisateurs standard
-// Dans la fonction LinksForRole, ajoutez le lien "Envoyer un Message" pour les rôles PDG et ChefDeProjet
-function LinksForRole({ role }) {
-  // Affiche le lien "Projets" uniquement pour les rôles spécifiés
+function LinksForRole({ role, newNotifications }) {
   if (["PDG", "ChefDeProjet", "UtilisateurStandard"].includes(role)) {
     return (
       <>
-        
         {role === "PDG" && (
           <>
-          <CustomLink to="/projets" className={styles.linkStyle}>
-          Projets
-        </CustomLink>
+            <CustomLink to="/projets" className={styles.linkStyle}>
+              Projets
+            </CustomLink>
             <CustomLink to="/creer-projet" className={styles.linkStyle}>
               Créer un projet
             </CustomLink>
@@ -35,7 +28,6 @@ function LinksForRole({ role }) {
             <CustomLink to="/creer-tache" className={styles.linkStyle}>
               Créer une tâche
             </CustomLink>
-            
             <CustomLink to="/documents" className={styles.linkStyle}>
               Documents
             </CustomLink>
@@ -50,7 +42,7 @@ function LinksForRole({ role }) {
             </CustomLink>
           </>
         )}
-         {(role === "ChefDeProjet" || role === "UtilisateurStandard") && (
+        {(role === "ChefDeProjet" || role === "UtilisateurStandard") && (
           <CustomLink to="/projets-assignes" className={styles.linkStyle}>
             Mes projets assignés
           </CustomLink>
@@ -63,6 +55,9 @@ function LinksForRole({ role }) {
         {role === "UtilisateurStandard" && (
           <CustomLink to="/notifications" className={styles.linkStyle}>
             Mes Notifications
+            {newNotifications > 0 && (
+              <span className={styles.notificationBadge}>{newNotifications}</span>
+            )}
           </CustomLink>
         )}
       </>
@@ -79,12 +74,10 @@ function LinksForRole({ role }) {
       </>
     );
   } else {
-    // Pour les autres rôles, aucun lien spécifique n'est affiché
     return null;
   }
 }
 
-// Section utilisateur pour la connexion, l'inscription ou l'affichage de l'utilisateur connecté
 function UserSection({ user }) {
   return user ? (
     <>
@@ -111,10 +104,22 @@ function UserSection({ user }) {
   );
 }
 
-// Barre de navigation principale
 function NavBar() {
-  const user = JSON.parse(localStorage.getItem("user")); // Récupère l'utilisateur depuis le localStorage
-  const role = localStorage.getItem("role"); // Récupère le rôle de l'utilisateur
+  const [newNotifications, setNewNotifications] = useState(0);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const role = localStorage.getItem("role");
+  const utilisateurId = localStorage.getItem("uid");
+
+  useEffect(() => {
+    if (utilisateurId) {
+      fetch(`http://localhost:3000/notification/notifications/${utilisateurId}/new`)
+        .then((response) => response.json())
+        .then((data) => {
+          setNewNotifications(data.newNotificationsCount);
+        })
+        .catch((error) => console.error("Erreur lors de la vérification des nouvelles notifications:", error));
+    }
+  }, [utilisateurId]);
 
   return (
     <nav className={styles.navStyle}>
@@ -125,10 +130,11 @@ function NavBar() {
         <CustomLink to="/" className={styles.linkStyle}>
           Accueil
         </CustomLink>
-        {user && <LinksForRole role={role} />}
+        {user && <LinksForRole role={role} newNotifications={newNotifications} />}
       </div>
       <UserSection user={user} />
     </nav>
   );
 }
+
 export default NavBar;
