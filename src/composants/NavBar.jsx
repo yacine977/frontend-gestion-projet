@@ -11,71 +11,66 @@ function CustomLink({ to, children, className }) {
 }
 
 function LinksForRole({ role, newNotifications }) {
-  if (["PDG", "ChefDeProjet", "UtilisateurStandard"].includes(role)) {
-    return (
-      <>
-        {role === "PDG" && (
-          <>
-            <CustomLink to="/projets" className={styles.linkStyle}>
-              Projets
-            </CustomLink>
-            <CustomLink to="/creer-projet" className={styles.linkStyle}>
-              Créer un projet
-            </CustomLink>
-            <CustomLink to="/taches" className={styles.linkStyle}>
-              Tâches
-            </CustomLink>
-            <CustomLink to="/creer-tache" className={styles.linkStyle}>
-              Créer une tâche
-            </CustomLink>
-            <CustomLink to="/documents" className={styles.linkStyle}>
-              Documents
-            </CustomLink>
-            <CustomLink to="/creer-document" className={styles.linkStyle}>
-              Créer un document
-            </CustomLink>
-            <CustomLink to="/users" className={styles.linkStyle}>
-              Utilisateurs
-            </CustomLink>
-            <CustomLink to="/send-message" className={styles.linkStyle}>
-              Envoyer un Message
-            </CustomLink>
-          </>
-        )}
-        {(role === "ChefDeProjet" || role === "UtilisateurStandard") && (
-          <CustomLink to="/projets-assignes" className={styles.linkStyle}>
-            Mes projets assignés
+  return (
+    <>
+      {["PDG", "ChefDeProjet", "UtilisateurStandard", "AdministrateurInfrastructure"].includes(role) && (
+        <CustomLink to="/notifications" className={styles.linkStyle}>
+          Mes Notifications
+          {newNotifications > 0 && (
+            <span className={styles.notificationBadge}>{newNotifications}</span>
+          )}
+        </CustomLink>
+      )}
+      {role === "PDG" && (
+        <>
+          <CustomLink to="/projets" className={styles.linkStyle}>
+            Projets
           </CustomLink>
-        )}
-        {role === "ChefDeProjet" && (
+          <CustomLink to="/creer-projet" className={styles.linkStyle}>
+            Créer un projet
+          </CustomLink>
+          <CustomLink to="/taches" className={styles.linkStyle}>
+            Tâches
+          </CustomLink>
+          <CustomLink to="/creer-tache" className={styles.linkStyle}>
+            Créer une tâche
+          </CustomLink>
+          <CustomLink to="/documents" className={styles.linkStyle}>
+            Documents
+          </CustomLink>
+          <CustomLink to="/creer-document" className={styles.linkStyle}>
+            Créer un document
+          </CustomLink>
+          <CustomLink to="/users" className={styles.linkStyle}>
+            Utilisateurs
+          </CustomLink>
           <CustomLink to="/send-message" className={styles.linkStyle}>
             Envoyer un Message
           </CustomLink>
-        )}
-        {role === "UtilisateurStandard" && (
-          <CustomLink to="/notifications" className={styles.linkStyle}>
-            Mes Notifications
-            {newNotifications > 0 && (
-              <span className={styles.notificationBadge}>{newNotifications}</span>
-            )}
+        </>
+      )}
+      {(role === "ChefDeProjet" || role === "UtilisateurStandard") && (
+        <CustomLink to="/projets-assignes" className={styles.linkStyle}>
+          Mes projets assignés
+        </CustomLink>
+      )}
+      {role === "ChefDeProjet" && (
+        <CustomLink to="/send-message" className={styles.linkStyle}>
+          Envoyer un Message
+        </CustomLink>
+      )}
+      {role === "AdministrateurInfrastructure" && (
+        <>
+          <CustomLink to="/users" className={styles.linkStyle}>
+            Utilisateurs
           </CustomLink>
-        )}
-      </>
-    );
-  } else if (role === "AdministrateurInfrastructure") {
-    return (
-      <>
-        <CustomLink to="/users" className={styles.linkStyle}>
-          Utilisateurs
-        </CustomLink>
-        <CustomLink to="/createUser" className={styles.linkStyle}>
-          Créer un utilisateur
-        </CustomLink>
-      </>
-    );
-  } else {
-    return null;
-  }
+          <CustomLink to="/createUser" className={styles.linkStyle}>
+            Créer un utilisateur
+          </CustomLink>
+        </>
+      )}
+    </>
+  );
 }
 
 function UserSection({ user }) {
