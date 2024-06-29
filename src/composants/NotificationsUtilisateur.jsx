@@ -25,7 +25,7 @@ function NotificationsUtilisateur() {
       })
       .catch((error) => console.error("Erreur lors de la récupération des notifications:", error));
   };
-  
+
   useEffect(() => {
     fetchNotifications(currentPage);
   }, [utilisateurId, currentPage]);
@@ -78,13 +78,12 @@ function NotificationsUtilisateur() {
                 Marquer comme lu
               </button>
             )}
-           <button
-  onClick={() => deleteNotification(notification.id)}
-  className="btn btn-danger"
->
-  Supprimer
-</button>
-
+            <button
+              onClick={() => deleteNotification(notification.id)}
+              className="btn btn-danger"
+            >
+              Supprimer
+            </button>
           </div>
         ))
       ) : (
