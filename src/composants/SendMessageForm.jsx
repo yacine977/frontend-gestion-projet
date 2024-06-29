@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import '../styles/SendMessageForm.css'; // Assurez-vous d'ajouter ce fichier CSS dans votre projet
 
@@ -6,7 +6,27 @@ function SendMessageForm() {
   const [message, setMessage] = useState('');
   const [dateHeure, setDateHeure] = useState('');
   const [utilisateurId, setUtilisateurId] = useState('');
+  const [users, setUsers] = useState([]); // État pour stocker la liste des utilisateurs
   const navigate = useNavigate();
+
+  // Fonction pour récupérer la liste des utilisateurs depuis le backend
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/utilisateur/getAllUsers');
+      if (!response.ok) {
+        throw new Error('Erreur lors de la récupération des utilisateurs');
+      }
+      const data = await response.json();
+      setUsers(data); // Mettre à jour l'état des utilisateurs avec la réponse
+    } catch (error) {
+      console.error(error.message);
+      alert('Erreur lors de la récupération des utilisateurs');
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers(); // Appeler fetchUsers une seule fois après le montage du composant
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,13 +73,19 @@ function SendMessageForm() {
           />
         </div>
         <div className="form-group">
-          <label>ID Utilisateur:</label>
-          <input
-            type="text"
+          <label>Sélectionner le destinataire:</label>
+          <select
             className="form-control"
             value={utilisateurId}
             onChange={(e) => setUtilisateurId(e.target.value)}
-          />
+          >
+            <option value="">Sélectionner un utilisateur</option>
+            {users.map((user) => (
+              <option key={user.utilisateurId} value={user.utilisateurId}>
+                {user.nom} {user.prenom}
+              </option>
+            ))}
+          </select>
         </div>
         <button type="submit" className="btn btn-primary">Créer Notification</button>
       </form>
