@@ -40,6 +40,10 @@ const ListeTachesProjetUtilisateur = () => {
         `http://localhost:3000/tache/terminer/${id}`,
         {
           method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ uid }),
         }
       );
       if (!response.ok) {
@@ -55,7 +59,7 @@ const ListeTachesProjetUtilisateur = () => {
       console.error("Erreur lors de la mise à jour de la tâche", error);
     }
   };
-
+  
   return (
     <div className="container">
       <h2 className="title">Liste des Tâches pour le Projet {projetId}</h2>{" "}

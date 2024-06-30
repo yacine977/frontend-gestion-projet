@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import moment from 'moment';
-import '../styles/NotificationsUtilisateur.css'; // Assurez-vous que le fichier CSS est correctement importé
+import '../styles/NotificationsUtilisateur.css'; 
 
 function NotificationsUtilisateur() {
   const [notifications, setNotifications] = useState([]);
@@ -18,7 +18,7 @@ function NotificationsUtilisateur() {
         if (data.notifications) {
           setNotifications(data.notifications);
         } else {
-          setNotifications([]); // Aucune notification disponible
+          setNotifications([]);
         }
         setTotalNotifications(data.totalNotifications);
         setHasNewNotifications(data.notifications && data.notifications.some(notification => notification.isNew));
@@ -34,9 +34,8 @@ function NotificationsUtilisateur() {
     fetch(`http://localhost:3000/notification/notifications/${utilisateurId}/mark-as-read/${notificationId}`, {
       method: 'PUT',
     })
-      .then((response) => response.json())
       .then(() => {
-        window.location.reload(); // Rafraîchir la page entière après la mise à jour
+        fetchNotifications(currentPage); // Rafraîchir les notifications après mise à jour
       })
       .catch((error) => console.error("Erreur lors de la mise à jour des notifications:", error));
   };
@@ -45,10 +44,8 @@ function NotificationsUtilisateur() {
     fetch(`http://localhost:3000/notification/notifications/${notificationId}`, {
       method: 'DELETE',
     })
-      .then((response) => response.json())
       .then(() => {
-        // Rafraîchir les notifications après la suppression
-        fetchNotifications(currentPage);
+        fetchNotifications(currentPage); // Rafraîchir les notifications après suppression
       })
       .catch((error) => console.error("Erreur lors de la suppression de la notification:", error));
   };

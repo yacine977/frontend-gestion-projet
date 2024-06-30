@@ -93,17 +93,19 @@ function TachesProjet() {
   };
 
   const assignerTache = (tacheId) => {
-    console.log("Assigner tâche:", tacheId, "à l'utilisateur:", utilisateurSelectionne);
-    if (!utilisateurSelectionne) {
-      alert("Veuillez sélectionner un utilisateur avant d'assigner une tâche.");
+    const assignerId = localStorage.getItem("uid"); // Récupération de l'UID de l'utilisateur assignant
+  
+    if (!utilisateurSelectionne || !assignerId) {
+      alert("Erreur: Veuillez sélectionner un utilisateur et être connecté.");
       return;
     }
+  
     fetch("http://localhost:3000/tache/assigner", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ tacheId, uid: utilisateurSelectionne }),
+      body: JSON.stringify({ tacheId, uid: utilisateurSelectionne, assignerId }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -115,6 +117,8 @@ function TachesProjet() {
         alert("Erreur lors de l'assignation de la tâche");
       });
   };
+  
+  
 
   return (
     <div className="container">
