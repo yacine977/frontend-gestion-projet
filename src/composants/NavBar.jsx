@@ -44,19 +44,11 @@ function LinksForRole({ role, newNotifications }) {
           <CustomLink to="/users" className={styles.linkStyle}>
             Utilisateurs
           </CustomLink>
-          <CustomLink to="/send-message" className={styles.linkStyle}>
-            Envoyer un Message
-          </CustomLink>
         </>
       )}
       {(role === "ChefDeProjet" || role === "UtilisateurStandard") && (
         <CustomLink to="/projets-assignes" className={styles.linkStyle}>
           Mes projets assignés
-        </CustomLink>
-      )}
-      {role === "ChefDeProjet" && (
-        <CustomLink to="/send-message" className={styles.linkStyle}>
-          Envoyer un Message
         </CustomLink>
       )}
       {role === "AdministrateurInfrastructure" && (
@@ -69,6 +61,9 @@ function LinksForRole({ role, newNotifications }) {
           </CustomLink>
         </>
       )}
+      <CustomLink to="/send-message" className={styles.linkStyle}>
+        Envoyer un Message
+      </CustomLink>
     </>
   );
 }
