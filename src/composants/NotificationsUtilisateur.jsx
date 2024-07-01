@@ -31,14 +31,14 @@ function NotificationsUtilisateur() {
   }, [utilisateurId, currentPage]);
 
   const markNotificationAsRead = (notificationId) => {
-    fetch(`http://localhost:3000/notification/notifications/${utilisateurId}/mark-as-read/${notificationId}`, {
-      method: 'PUT',
+  fetch(`http://localhost:3000/notification/notifications/${utilisateurId}/mark-as-read/${notificationId}`, {
+    method: 'PUT',
+  })
+    .then(() => {
+      window.location.reload(); // Rafraîchir toute la page après la mise à jour
     })
-      .then(() => {
-        fetchNotifications(currentPage); // Rafraîchir les notifications après mise à jour
-      })
-      .catch((error) => console.error("Erreur lors de la mise à jour des notifications:", error));
-  };
+    .catch((error) => console.error("Erreur lors de la mise à jour des notifications:", error));
+};
 
   const deleteNotification = (notificationId) => {
     fetch(`http://localhost:3000/notification/notifications/${notificationId}`, {
