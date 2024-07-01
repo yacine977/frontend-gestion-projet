@@ -4,7 +4,7 @@ import '../styles/SendMessageForm.css'; // Assurez-vous d'ajouter ce fichier CSS
 
 function SendMessageForm() {
   const [message, setMessage] = useState('');
-  const [dateHeure, setDateHeure] = useState('');
+  const [dateHeure, setDateHeure] = useState(() => new Date().toISOString().slice(0, 16)); // Initialiser avec la date et heure locale
   const [utilisateurId, setUtilisateurId] = useState('');
   const [users, setUsers] = useState([]); // État pour stocker la liste des utilisateurs
   const navigate = useNavigate();
@@ -28,28 +28,35 @@ function SendMessageForm() {
     fetchUsers(); // Appeler fetchUsers une seule fois après le montage du composant
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch('http://localhost:3000/notification/nouvelle-notification', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message, dateHeure, utilisateurId }),
-      });
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    // Conversion de la dateHeure de l'état au format MySQL
+    const dateHeureMySQL = dateHeure.replace(/T/, ' ').replace(/:\d\d\.\d+/, '');
 
-      if (!response.ok) {
-        throw new Error('Erreur lors de la création de la notification');
-      }
+    const response = await fetch('http://localhost:3000/notification/nouvelle-notification', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+        message, 
+        dateHeure: dateHeureMySQL, // Utiliser la date formatée pour l'envoi
+        utilisateurId 
+      }),
+    });
 
-      const data = await response.json();
-      alert(`Notification créée avec succès. ID: ${data.id}`);
-      navigate('/');
-    } catch (error) {
-      alert(error.message);
+    if (!response.ok) {
+      throw new Error('Erreur lors de la création de la notification');
     }
-  };
+
+    const data = await response.json();
+    alert(`Notification créée avec succès. ID: ${data.id}`);
+    navigate('/');
+  } catch (error) {
+    alert(error.message);
+  }
+};
 
   return (
     <div className="send-message-form-container">
@@ -70,6 +77,7 @@ function SendMessageForm() {
             className="form-control"
             value={dateHeure}
             onChange={(e) => setDateHeure(e.target.value)}
+            disabled // Désactiver la modification de la date et heure
           />
         </div>
         <div className="form-group">
