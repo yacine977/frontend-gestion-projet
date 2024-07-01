@@ -127,6 +127,33 @@ const afficherEtChoisirProjet = async (projets) => {
     }
   };
 
+ const deleteUser = async (utilisateurId) => {
+  // Ajout d'une fenêtre de confirmation avant la suppression
+  const isConfirmed = window.confirm("Êtes-vous sûr de vouloir supprimer cet utilisateur ?");
+  if (!isConfirmed) {
+    return; // Annule la suppression si l'utilisateur clique sur "Annuler"
+  }
+
+  try {
+    const response = await fetch(
+      `http://localhost:3000/utilisateur/deleteUser/${utilisateurId}`,
+      {
+        method: "DELETE",
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`Erreur HTTP: ${response.status}`);
+    }
+    const data = await response.json();
+    alert(data.message);
+    // Rafraîchissement de la page après une suppression réussie
+    window.location.reload();
+  } catch (error) {
+    console.error("Erreur lors de la suppression de l'utilisateur :", error);
+    alert("Une erreur est survenue. Veuillez réessayer.");
+  }
+}
+
 // Mise à jour des références dans le composant React
 
   // Le corps du composant reste inchangé, sauf pour la mise à jour des noms de classe
@@ -190,17 +217,11 @@ const afficherEtChoisirProjet = async (projets) => {
               </button>
               <button
                 className="ul_deleteButton"
-                onClick={async () => {
-                  const confirmation = window.confirm(
-                    "Êtes-vous sûr de vouloir supprimer cet utilisateur ?"
-                  );
-                  if (confirmation) {
-                    // La logique de suppression reste inchangée
-                  }
-                }}
+                onClick={() => deleteUser(user.utilisateurId)}
               >
                 <FontAwesomeIcon icon={faTrashAlt} /> Supprimer
               </button>
+
             </>
           )}
         </div>
