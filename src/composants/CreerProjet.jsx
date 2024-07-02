@@ -13,64 +13,72 @@ function CreerProjet() {
   const [dateFinReel, setDateFinReel] = useState("");
   const navigate = useNavigate(); 
 
-  // Gestionnaire de soumission du formulaire
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+ // Gestionnaire de soumission du formulaire
+const handleSubmit = async (event) => {
+  event.preventDefault();
 
-    // Validation : le nom et la description ne doivent pas être vides
-    if (!nom.trim() || !description.trim()) {
-      alert("Le nom et la description ne peuvent pas être vides");
-      return;
-    }
+  // Validation : le nom et la description ne doivent pas être vides
+  if (!nom.trim() || !description.trim()) {
+    alert("Le nom et la description ne peuvent pas être vides");
+    return;
+  }
 
-    // Conversion des chaînes de date en objets Date pour comparaison
-    const debut = new Date(dateDebut);
-    const finPrevu = new Date(dateFinPrevu);
-    const finReel = dateFinReel ? new Date(dateFinReel) : null; // Convertir seulement si dateFinReel n'est pas vide
+  // Conversion des chaînes de date en objets Date pour comparaison
+  const debut = new Date(dateDebut);
+  const finPrevu = new Date(dateFinPrevu);
+  const finReel = dateFinReel ? new Date(dateFinReel) : null; // Convertir seulement si dateFinReel n'est pas vide
 
-    // Validation : la date de début doit être antérieure à la date de fin prévue
-    if (debut > finPrevu) {
-      alert(
-        "La date de début ne peut pas être supérieure à la date de fin prévue"
-      );
-      return;
-    }
+  // Validation : la date de début doit être aujourd'hui ou dans le futur
+  const aujourdhui = new Date();
+  if (debut < aujourdhui) {
+    alert("La date de début ne peut pas être dans le passé");
+    return;
+  }
 
-    // Validation : la date de fin réelle doit être postérieure à la date de début
-    if (finReel && finReel < debut) {
-      alert(
-        "La date de fin réelle ne peut pas être inférieure à la date de début"
-      );
-      return;
-    }
+  // Validation : la date de début doit être antérieure à la date de fin prévue
+  if (debut > finPrevu) {
+    alert(
+      "La date de début ne peut pas être supérieure à la date de fin prévue"
+    );
+    return;
+  }
 
-    // Préparation de l'objet projet à envoyer
-    const projet = { nom, description, dateDebut, dateFinPrevu, dateFinReel };
+  // Validation : la date de fin réelle doit être postérieure à la date de début
+  if (finReel && finReel < debut) {
+    alert(
+      "La date de fin réelle ne peut pas être inférieure à la date de début"
+    );
+    return;
+  }
 
-    // Envoi du projet au serveur
-    const response = await fetch("http://localhost:3000/projet", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(projet),
-    });
+  // Préparation de l'objet projet à envoyer
+  const projet = { nom, description, dateDebut, dateFinPrevu, dateFinReel };
 
-    // Gestion de la réponse du serveur
-    if (response.ok) {
-      alert("Projet créé avec succès");
-      navigate('/projets'); 
-      // Réinitialisation des champs du formulaire
-      setNom("");
-      setDescription("");
-      setDateDebut("");
-      setDateFinPrevu("");
-      setDateFinReel("");
-    } else {
-      alert("Erreur lors de la création du projet");
-    }
-  };
+  // Envoi du projet au serveur
+  const response = await fetch("http://localhost:3000/projet", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    body: JSON.stringify(projet),
+  });
+
+  // Gestion de la réponse du serveur
+  if (response.ok) {
+    alert("Projet créé avec succès");
+    navigate('/projets'); 
+    // Réinitialisation des champs du formulaire
+    setNom("");
+    setDescription("");
+    setDateDebut("");
+    setDateFinPrevu("");
+    setDateFinReel("");
+  } else {
+    alert("Erreur lors de la création du projet");
+  }
+};
+
 
   // Rendu du formulaire de création de projet
   return (

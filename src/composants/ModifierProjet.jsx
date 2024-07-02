@@ -64,6 +64,11 @@ function ModifierProjet() {
     const finPrevu = new Date(dateFinPrevu);
     let finReel = dateFinReel ? new Date(dateFinReel) : null; // Permettre null
 
+    if (debut < new Date()) {
+      alert("La date de début ne peut pas être dans le passé");
+      return;
+    }
+
     if (debut > finPrevu) {
       alert("La date de début ne peut pas être supérieure à la date de fin prévue");
       return;
