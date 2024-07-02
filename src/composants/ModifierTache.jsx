@@ -1,16 +1,20 @@
-// Importation des hooks et composants nécessaires depuis react et react-router-dom
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-
-// Importation du style CSS pour le composant
 import "../styles/CreerTache.css";
 
+// Fonction utilitaire pour formater la date en yyyy-mm-dd
+const formatDate = (date) => {
+  const d = new Date(date);
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  const year = d.getFullYear();
+  return [year, month, day].join("-");
+};
+
 function ModifierTache() {
-  // Utilisation des hooks pour récupérer les paramètres de l'URL et naviguer programmatically
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // Déclaration des états locaux pour gérer les informations de la tâche
   const [description, setDescription] = useState("");
   const [priorite, setPriorite] = useState(0);
   const [statut, setStatut] = useState("");
@@ -22,7 +26,6 @@ function ModifierTache() {
   const [errors, setErrors] = useState({});
   const [projet, setProjet] = useState(null);
 
-  // Chargement des données de la tâche depuis l'API au montage du composant
   useEffect(() => {
     const fetchTache = async () => {
       const response = await fetch(`http://localhost:3000/tache/${id}`);
@@ -32,16 +35,10 @@ function ModifierTache() {
       const data = await response.json();
       const tache = data;
 
-      // Formatage des dates pour les champs de type date
-      const dateDebut = new Date(tache.dateDebut).toISOString().split("T")[0];
-      const dateFinPrevu = new Date(tache.dateFinPrevu)
-        .toISOString()
-        .split("T")[0];
-      const dateFinReel = tache.dateFinReel
-        ? new Date(tache.dateFinReel).toISOString().split("T")[0]
-        : "";
+      const dateDebut = formatDate(tache.dateDebut);
+      const dateFinPrevu = formatDate(tache.dateFinPrevu);
+      const dateFinReel = tache.dateFinReel ? formatDate(tache.dateFinReel) : "";
 
-      // Mise à jour des états avec les données de la tâche
       setDescription(tache.description || "");
       setPriorite(tache.priorite || 0);
       setStatut(tache.statut || "");
@@ -54,7 +51,6 @@ function ModifierTache() {
     fetchTache();
   }, [id]);
 
-  // Récupération des détails du projet
   useEffect(() => {
     const fetchProjet = async () => {
       const response = await fetch(`http://localhost:3000/projet/${projetId}`);
@@ -67,15 +63,13 @@ function ModifierTache() {
     }
   }, [projetId]);
 
-  // Validation du formulaire avant soumission
   const validateForm = () => {
     let formErrors = {};
     if (!description) formErrors.description = "La description est requise";
     if (!priorite) formErrors.priorite = "La priorité est requise";
     if (!statut) formErrors.statut = "Le statut est requis";
     if (!dateDebut) formErrors.dateDebut = "La date de début est requise";
-    if (!dateFinPrevu)
-      formErrors.dateFinPrevu = "La date de fin prévue est requise";
+    if (!dateFinPrevu) formErrors.dateFinPrevu = "La date de fin prévue est requise";
     if (!projetId) formErrors.projetId = "L'ID du projet est requis";
 
     const debut = new Date(dateDebut);
@@ -87,15 +81,15 @@ function ModifierTache() {
       const projetFinPrevu = new Date(projet.dateFinPrevu);
 
       if (debut < projetDebut || debut > projetFinPrevu) {
-        formErrors.dateDebut = "La date de début de la tâche doit être comprise entre les dates du projet";
+        formErrors.dateDebut = `La date de début de la tâche (${dateDebut}) doit être comprise entre les dates du projet (${formatDate(projet.dateDebut)} et ${formatDate(projet.dateFinPrevu)})`;
       }
 
       if (finPrevu < projetDebut || finPrevu > projetFinPrevu) {
-        formErrors.dateFinPrevu = "La date de fin prévue de la tâche doit être comprise entre les dates du projet";
+        formErrors.dateFinPrevu = `La date de fin prévue de la tâche (${dateFinPrevu}) doit être comprise entre les dates du projet (${formatDate(projet.dateDebut)} et ${formatDate(projet.dateFinPrevu)})`;
       }
 
       if (finReel && (finReel < projetDebut || finReel > projetFinPrevu)) {
-        formErrors.dateFinReel = "La date de fin réelle de la tâche doit être comprise entre les dates du projet";
+        formErrors.dateFinReel = `La date de fin réelle de la tâche (${dateFinReel}) doit être comprise entre les dates du projet (${formatDate(projet.dateDebut)} et ${formatDate(projet.dateFinPrevu)})`;
       }
     }
 
@@ -103,7 +97,6 @@ function ModifierTache() {
     return Object.keys(formErrors).length === 0;
   };
 
-  // Gestion de la soumission du formulaire
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!validateForm()) return;
@@ -133,29 +126,17 @@ function ModifierTache() {
         alert("Tâche modifiée avec succès");
         navigate(`/taches-projet/${projetId}`);
       } else {
-        // Gestion des erreurs de réponse
-        if (response.headers.get("content-type").includes("application/json")) {
-          const errorData = await response.json();
-          console.error(
-            "Erreur lors de la modification de la tâche :",
-            errorData
-          );
-        } else {
-          console.error(
-            "Erreur lors de la modification de la tâche :",
-            await response.text()
-          );
-        }
-        alert("Erreur lors de la modification de la tâche");
+        const errorText = await response.text();
+        alert(`Erreur lors de la modification de la tâche : ${errorText}`);
       }
     } catch (error) {
       console.error("Erreur lors de la modification de la tâche :", error);
+      alert(`Erreur lors de la modification de la tâche : ${error.message}`);
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Rendu du formulaire de modification de la tâche
   return (
     <form onSubmit={handleSubmit} className="creer-tache">
       {Object.keys(errors).length > 0 && (

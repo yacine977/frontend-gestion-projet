@@ -13,6 +13,8 @@ function ModifierReunion() {
   const [dateTime, setDateTime] = useState("");
   const [projetId, setProjetId] = useState("");
   const [createurId, setCreateurId] = useState("");
+  const [projet, setProjet] = useState(null);
+  const [errorMessages, setErrorMessages] = useState([]);
 
   // Chargement des données de la réunion à partir de l'API au montage du composant.
   useEffect(() => {
@@ -28,6 +30,11 @@ function ModifierReunion() {
         setDateTime(formatDateTime(data.dateTime));
         setProjetId(data.projetId);
         setCreateurId(data.createurId);
+
+        // Récupération des détails du projet
+        const projetResponse = await fetch(`http://localhost:3000/projet/${data.projetId}`);
+        const projetData = await projetResponse.json();
+        setProjet(projetData);
       } catch (error) {
         console.error(error.message);
       }
@@ -57,6 +64,39 @@ function ModifierReunion() {
    */
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // Réinitialiser les messages d'erreur
+    setErrorMessages([]);
+
+    const newErrorMessages = [];
+
+    // Validation du sujet
+    if (!sujet.trim()) {
+      newErrorMessages.push("Le sujet ne peut pas être vide");
+    }
+
+    // Validation des dates
+    const reunionDateTime = new Date(dateTime);
+
+    if (!isValidDate(reunionDateTime)) {
+      newErrorMessages.push("La date et l'heure de la réunion ne sont pas valides");
+    }
+
+    if (projet) {
+      const projetDebut = new Date(projet.dateDebut);
+      const projetFinPrevu = new Date(projet.dateFinPrevu);
+
+      if (reunionDateTime < projetDebut || reunionDateTime > projetFinPrevu) {
+        newErrorMessages.push("La date et l'heure de la réunion doivent être comprises entre les dates du projet");
+      }
+    }
+
+    // Si des erreurs sont trouvées, les afficher et ne pas soumettre le formulaire
+    if (newErrorMessages.length > 0) {
+      setErrorMessages(newErrorMessages);
+      return;
+    }
+
     const reunion = { sujet, dateTime, projetId, createurId };
 
     try {
@@ -65,21 +105,35 @@ function ModifierReunion() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(reunion),
       });
-      if (!response.ok)
-        throw new Error("Erreur lors de la modification de la réunion");
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Erreur lors de la modification de la réunion");
+      }
       alert("Réunion modifiée avec succès");
       setSujet("");
       setDateTime("");
       setProjetId("");
       setCreateurId("");
     } catch (error) {
-      alert(error.message);
+      setErrorMessages([error.message]);
     }
+  };
+
+  // Fonction utilitaire pour valider la date
+  const isValidDate = (date) => {
+    return date instanceof Date && !isNaN(date);
   };
 
   // Rendu du formulaire de modification de la réunion.
   return (
     <form onSubmit={handleSubmit}>
+      {errorMessages.length > 0 && (
+        <div className="error-messages">
+          {errorMessages.map((message, index) => (
+            <p key={index} className="error-message">{message}</p>
+          ))}
+        </div>
+      )}
       <label>
         Sujet:
         <input
