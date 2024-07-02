@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import moment from 'moment';
+import 'moment/locale/fr';
 import '../styles/NotificationsUtilisateur.css'; 
 
 function NotificationsUtilisateur() {
@@ -31,14 +32,14 @@ function NotificationsUtilisateur() {
   }, [utilisateurId, currentPage]);
 
   const markNotificationAsRead = (notificationId) => {
-  fetch(`http://localhost:3000/notification/notifications/${utilisateurId}/mark-as-read/${notificationId}`, {
-    method: 'PUT',
-  })
-    .then(() => {
-      window.location.reload(); // Rafraîchir toute la page après la mise à jour
+    fetch(`http://localhost:3000/notification/notifications/${utilisateurId}/mark-as-read/${notificationId}`, {
+      method: 'PUT',
     })
-    .catch((error) => console.error("Erreur lors de la mise à jour des notifications:", error));
-};
+      .then(() => {
+        window.location.reload(); // Rafraîchir toute la page après la mise à jour
+      })
+      .catch((error) => console.error("Erreur lors de la mise à jour des notifications:", error));
+  };
 
   const deleteNotification = (notificationId) => {
     fetch(`http://localhost:3000/notification/notifications/${notificationId}`, {
@@ -65,7 +66,7 @@ function NotificationsUtilisateur() {
           <div key={notification.id} className={`notification ${notification.isNew ? 'new' : ''}`}>
             <p>{notification.message}</p>
             <p className="notification-date">
-              Date: {moment(notification.dateHeure).locale('fr').format('LLLL')}
+              Date: {moment(notification.dateHeure).subtract(10, 'hours').add(1, 'day').locale('fr').format('LLLL')}
             </p>
             {notification.isNew && (
               <button 
