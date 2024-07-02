@@ -1,7 +1,3 @@
-// Correction du problème avec setErrors
-// Le problème est que setErrors est déclaré comme une constante sans utiliser useState.
-// Pour corriger cela, nous devons initialiser setErrors avec useState pour qu'il puisse être utilisé comme une fonction.
-
 // Importation des hooks et composants nécessaires depuis react et react-router-dom
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -12,7 +8,7 @@ import "../styles/CreerTache.css";
 function ModifierTache() {
   // Utilisation des hooks pour récupérer les paramètres de l'URL et naviguer programmatically
   const { id } = useParams();
- 
+  const navigate = useNavigate();
 
   // Déclaration des états locaux pour gérer les informations de la tâche
   const [description, setDescription] = useState("");
@@ -23,7 +19,8 @@ function ModifierTache() {
   const [dateFinReel, setDateFinReel] = useState("");
   const [projetId, setProjetId] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErrors] = useState({}); // Correction ici
+  const [errors, setErrors] = useState({});
+  const [projet, setProjet] = useState(null);
 
   // Chargement des données de la tâche depuis l'API au montage du composant
   useEffect(() => {
@@ -57,6 +54,19 @@ function ModifierTache() {
     fetchTache();
   }, [id]);
 
+  // Récupération des détails du projet
+  useEffect(() => {
+    const fetchProjet = async () => {
+      const response = await fetch(`http://localhost:3000/projet/${projetId}`);
+      const data = await response.json();
+      setProjet(data);
+    };
+
+    if (projetId) {
+      fetchProjet();
+    }
+  }, [projetId]);
+
   // Validation du formulaire avant soumission
   const validateForm = () => {
     let formErrors = {};
@@ -67,6 +77,28 @@ function ModifierTache() {
     if (!dateFinPrevu)
       formErrors.dateFinPrevu = "La date de fin prévue est requise";
     if (!projetId) formErrors.projetId = "L'ID du projet est requis";
+
+    const debut = new Date(dateDebut);
+    const finPrevu = new Date(dateFinPrevu);
+    const finReel = dateFinReel ? new Date(dateFinReel) : null;
+
+    if (projet) {
+      const projetDebut = new Date(projet.dateDebut);
+      const projetFinPrevu = new Date(projet.dateFinPrevu);
+
+      if (debut < projetDebut || debut > projetFinPrevu) {
+        formErrors.dateDebut = "La date de début de la tâche doit être comprise entre les dates du projet";
+      }
+
+      if (finPrevu < projetDebut || finPrevu > projetFinPrevu) {
+        formErrors.dateFinPrevu = "La date de fin prévue de la tâche doit être comprise entre les dates du projet";
+      }
+
+      if (finReel && (finReel < projetDebut || finReel > projetFinPrevu)) {
+        formErrors.dateFinReel = "La date de fin réelle de la tâche doit être comprise entre les dates du projet";
+      }
+    }
+
     setErrors(formErrors);
     return Object.keys(formErrors).length === 0;
   };
@@ -99,7 +131,7 @@ function ModifierTache() {
 
       if (response.ok) {
         alert("Tâche modifiée avec succès");
-        // Redirection vers la page d'accueil
+        navigate(`/taches-projet/${projetId}`);
       } else {
         // Gestion des erreurs de réponse
         if (response.headers.get("content-type").includes("application/json")) {
@@ -126,6 +158,13 @@ function ModifierTache() {
   // Rendu du formulaire de modification de la tâche
   return (
     <form onSubmit={handleSubmit} className="creer-tache">
+      {Object.keys(errors).length > 0 && (
+        <div className="error-messages">
+          {Object.entries(errors).map(([key, message]) => (
+            <p key={key} className="error-message">{message}</p>
+          ))}
+        </div>
+      )}
       <label>
         Description:
         <input
