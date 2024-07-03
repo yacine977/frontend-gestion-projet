@@ -36,7 +36,7 @@ function DetailProjet() {
       <p>Date de début : {new Date(projet.dateDebut).toLocaleDateString()}</p>
       <p>Date de fin prévue : {new Date(projet.dateFinPrevu).toLocaleDateString()}</p>
       <p>Date de fin réelle : {projet.dateFinReel ? new Date(projet.dateFinReel).toLocaleDateString() : 'Non définie'}</p>
-      <p>Chef de projet ID : {projet.chefDeProjetId}</p>
+      {/* <p>Chef de projet ID : {projet.chefDeProjetId}</p> */}
       <p>Est validé : {projet.est_valide ? 'Oui' : 'Non'}</p>
       <div className='button-group'>
        
