@@ -55,7 +55,7 @@ function ProjectDocuments() {
           <p className="document-info">Type: {document.type}</p>
           <p className="document-info">Chemin d'accès: {document.cheminAcces}</p>
           {/*<p className="document-info">ID de l'utilisateur: {document.utilisateurId}</p> */}
-          <p className="document-info">Créateur: {document.prenom} {document.nom}</p> {/* Ajouté */}
+          <p className="document-info">Créateur: {document.utilisateurPrenom} {document.utilisateurNom}</p>
 
           {/* <p className="document-info">ID du projet: {document.projetId}</p> */}
           <button onClick={() => supprimerDocument(document.documentId)}>Supprimer</button>
