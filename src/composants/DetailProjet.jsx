@@ -43,6 +43,7 @@ function DetailProjet() {
         <Link to={`/creer-document/${projet.id}`} className='button'>
               Créer un document pour ce projet
             </Link>
+            
         {role === "PDG" || role === "ChefDeProjet" ? (
           <>
             <Link to={`/creer-tache/${projet.id}`} className='button'>
@@ -60,9 +61,11 @@ function DetailProjet() {
         <Link to={`/creer-reunion/${projet.id}`} className='button'>
           Créer une réunion pour ce projet
         </Link>
-        <Link to={`/reunion-projet/${projet.id}`} className='button'>
-          Voir les réunions de ce projet
-        </Link>
+        {role === "PDG" && (
+  <Link to={`/reunion-projet/${projet.id}`} className='button'>
+    Voir les réunions de ce projet
+  </Link>
+)}
         <Link to={`/reunion-projet-utilisateur/${projet.id}`} className='button'>
       Voir mes réunions pour ce projet
     </Link>
