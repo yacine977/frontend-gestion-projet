@@ -179,15 +179,15 @@ function CreerTache() {
           onChange={(e) => setDateFinReel(e.target.value)}
         />
       </label>
-      <label>
-        ID du projet:
-        <input
-          type="number"
-          value={projetId}
-          onChange={(e) => setProjetId(e.target.value)}
-          required
-        />
-      </label>
+      {/* <label>
+  ID du projet:
+  <input
+    type="number"
+    value={projetId}
+    onChange={(e) => setProjetId(e.target.value)}
+    required
+  />
+</label> */}
       <button type="submit" className="submit-button">
         Créer une tâche
       </button>

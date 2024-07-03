@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import "../styles/ListeDocuments.css";
 
 function ProjectDocuments() {
   const [documents, setDocuments] = useState([]);
@@ -46,15 +47,17 @@ function ProjectDocuments() {
   };
 
   return (
-    <div>
-      <h1>Documents du projet {projetId}</h1>
+    <div className="documents-container">
+      <h1 className="documents-title">Documents du projet {projetId}</h1>
       {documents.map((document) => (
-        <div key={document.id}>
-          <h2>{document.nom}</h2>
-          <p>Type: {document.type}</p>
-          <p>Chemin d'accès: {document.cheminAcces}</p>
-          <p>ID de l'utilisateur: {document.utilisateurId}</p>
-          <p>ID du projet: {document.projetId}</p>
+        <div className="document-item" key={document.id}>
+          <h2 className="document-title">{document.nom}</h2>
+          <p className="document-info">Type: {document.type}</p>
+          <p className="document-info">Chemin d'accès: {document.cheminAcces}</p>
+          {/*<p className="document-info">ID de l'utilisateur: {document.utilisateurId}</p> */}
+          <p className="document-info">Créateur: {document.prenom} {document.nom}</p> {/* Ajouté */}
+
+          {/* <p className="document-info">ID du projet: {document.projetId}</p> */}
           <button onClick={() => supprimerDocument(document.documentId)}>Supprimer</button>
           <Link to={`/UpdateDocumentForm/${document.documentId}`} className="document-update-button">
             Modifier
@@ -63,6 +66,7 @@ function ProjectDocuments() {
       ))}
     </div>
   );
+  
 }
 
 export default ProjectDocuments;

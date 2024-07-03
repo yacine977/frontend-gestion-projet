@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import '../styles/ReunionProjet.css'; // Assurez-vous d'importer le fichier CSS modifié
 
 function ReunionProjet() {
   const [reunions, setReunions] = useState([]);
   const { projetId } = useParams();
-  const role = localStorage.getItem("role"); // Étape 1: Récupérer le rôle de l'utilisateur
+  const role = localStorage.getItem("role");
 
   useEffect(() => {
     fetch(`http://localhost:3000/reunion/par-projet/${projetId}`)
@@ -31,20 +32,18 @@ function ReunionProjet() {
   };
 
   return (
-    <div>
-      <h2>Réunions pour ce projet :</h2>
+    <div id="reunion-container">
+      <h2 id="reunion-title">Réunions pour ce projet :</h2>
       {reunions.length > 0 ? (
         reunions.map((reunion) => (
           <div key={reunion.id}>
-            <h3>{reunion.sujet}</h3>
-            <p>Date et heure : {new Date(reunion.dateTime).toLocaleString('fr-FR')}</p>
-            <p>ID du projet : {reunion.projetId}</p>
-            <p>ID du créateur : {reunion.createurId}</p>
-            {/* Étape 2 et 3: Affichage conditionnel en fonction du rôle */}
+            <h3 id="reunion-subtitle">{reunion.sujet}</h3>
+            <p id="reunion-info">Créateur: {reunion.nom} {reunion.prenom}</p> {/* Affichage du nom et prénom du créateur */} 
+            <p id="reunion-info">Date et heure : {new Date(reunion.dateTime).toLocaleString('fr-FR')}</p>
             {(role === "PDG" || role === "ChefDeProjet") && (
               <>
-                <Link to={`/modifier-reunion/${reunion.id}`}>Modifier la réunion</Link>
-                <button onClick={() => supprimerReunion(reunion.id)}>Supprimer la réunion</button>
+                <Link id="link" to={`/modifier-reunion/${reunion.id}`}>Modifier la réunion</Link>
+                <button id="button" onClick={() => supprimerReunion(reunion.id)}>Supprimer la réunion</button>
               </>
             )}
           </div>

@@ -127,7 +127,7 @@ function CreerReunion() {
           className="input"
         />
       </label>
-      <label className="label">
+      {/* <label className="label">
         ID du projet:
         <input
           type="number"
@@ -145,7 +145,7 @@ function CreerReunion() {
           readOnly // Ce champ est en lecture seule car la valeur est pré-remplie
           className="input"
         />
-      </label>
+      </label> */}
       <button type="submit" className="button-submit">Créer une réunion</button>
     </form>
   );

@@ -84,14 +84,15 @@ function CreerDocument() {
           Chemin d'accès:
           <input type="text" value={cheminAcces} onChange={(e) => setCheminAcces(e.target.value)} required className="form-input" />
         </label>
-        <label className="form-label">
+        {/* <label className="form-label">
           ID de l'utilisateur:
           <input type="text" value={utilisateurId} onChange={(e) => setUtilisateurId(e.target.value)} required className="form-input" />
         </label>
-        <label className="form-label">
+         
+         <label className="form-label">
           ID du projet:
           <input type="text" value={projetId} onChange={(e) => setProjetId(e.target.value)} required className="form-input" />
-        </label>
+        </label>*/}
         <input type="submit" value="Créer" className="form-submit" />
       </form>
     </div>

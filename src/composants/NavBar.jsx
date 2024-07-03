@@ -29,18 +29,18 @@ function LinksForRole({ role, newNotifications }) {
           <CustomLink to="/creer-projet" className={styles.linkStyle}>
             Créer un projet
           </CustomLink>
-          <CustomLink to="/taches" className={styles.linkStyle}>
-            Tâches
-          </CustomLink>
-          <CustomLink to="/creer-tache" className={styles.linkStyle}>
-            Créer une tâche
-          </CustomLink>
-          <CustomLink to="/documents" className={styles.linkStyle}>
-            Documents
-          </CustomLink>
-          <CustomLink to="/creer-document" className={styles.linkStyle}>
-            Créer un document
-          </CustomLink>
+         {/* <CustomLink to="/taches" className={styles.linkStyle}>
+  Tâches
+</CustomLink>
+<CustomLink to="/creer-tache" className={styles.linkStyle}>
+  Créer une tâche
+</CustomLink>
+<CustomLink to="/documents" className={styles.linkStyle}>
+  Documents
+</CustomLink>
+<CustomLink to="/creer-document" className={styles.linkStyle}>
+  Créer un document
+</CustomLink> */}
           <CustomLink to="/users" className={styles.linkStyle}>
             Utilisateurs
           </CustomLink>

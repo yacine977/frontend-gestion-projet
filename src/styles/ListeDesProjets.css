@@ -53,3 +53,33 @@
     background-image: linear-gradient(to right, #f44336, #f6685e); /* Gradient rouge */
 }
 
+.recherche-projet {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 400px; /* Ajustez la largeur maximale selon vos besoins */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    outline: none;
+    color: #333;
+    background-color: #f9f9f9;
+  }
+  
+  .recherche-projet:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0,123,255,0.2);
+  }
+  
+  .recherche-projet::placeholder {
+    color: #aaa;
+  }
+  
+  /* Style pour l'icône de recherche, si vous décidez d'en ajouter une */
+  .recherche-projet-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ccc;
+  }

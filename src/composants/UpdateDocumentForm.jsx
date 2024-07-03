@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import "../styles/CreerDocument.css";
 
 function UpdateDocumentForm() {
   const { id } = useParams();
@@ -89,33 +90,35 @@ function UpdateDocumentForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Nom:
-        <input type="text" value={nom} onChange={(e) => setNom(e.target.value)} />
-      </label>
-      <label className="form-label">
-        Type:
-        <select value={type} onChange={e => setType(e.target.value)} required className="form-input">
-          <option value="">Sélectionnez un type</option>
-          <option value=".txt">.txt</option>
-          <option value=".pdf">.pdf</option>
-        </select>
-      </label>
-      <label>
-        Chemin d'accès:
-        <input type="text" value={cheminAcces} onChange={(e) => setCheminAcces(e.target.value)} />
-      </label>
-      <label>
-        ID de l'utilisateur:
-        <input type="text" value={utilisateurId} readOnly />
-      </label>
-      <label>
-        ID du projet:
-        <input type="text" value={projetId} onChange={(e) => setProjetId(e.target.value)} />
-      </label>
-      <button type="submit">Mettre à jour</button>
-    </form>
+    <div className="form-container">
+      <form onSubmit={handleSubmit} className="form">
+        <label className="form-label">
+          Nom:
+          <input type="text" value={nom} onChange={(e) => setNom(e.target.value)} required className="form-input" />
+        </label>
+        <label className="form-label">
+          Type:
+          <select value={type} onChange={(e) => setType(e.target.value)} required className="form-input">
+            <option value="">Sélectionnez un type</option>
+            <option value=".txt">.txt</option>
+            <option value=".pdf">.pdf</option>
+          </select>
+        </label>
+        <label className="form-label">
+          Chemin d'accès:
+          <input type="text" value={cheminAcces} onChange={(e) => setCheminAcces(e.target.value)} required className="form-input" />
+        </label>
+      {/* <label className="form-label">
+          ID de l'utilisateur:
+          <input type="text" value={utilisateurId} readOnly className="form-input" />
+        </label>
+        <label className="form-label">
+          ID du projet:
+          <input type="text" value={projetId} onChange={(e) => setProjetId(e.target.value)} required className="form-input" />
+        </label> */}
+        <button type="submit" className="form-submit">Mettre à jour</button>
+      </form>
+    </div>
   );
 }
 

@@ -1,0 +1,44 @@
+#reunion-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+
+#reunion-title, #reunion-subtitle {
+    color: #333;
+}
+
+#reunion-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+#reunion-subtitle {
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+#reunion-info {
+    margin-bottom: 5px;
+}
+
+#link, #button {
+    margin-right: 10px;
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+#link {
+    background-color: #007bff;
+}
+
+#button {
+    background-color: #dc3545;
+}
+
+#button:hover, #link:hover {
+    opacity: 0.8;
+}

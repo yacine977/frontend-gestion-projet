@@ -52,8 +52,10 @@ function ListeDocuments() {
           <h2 className="document-title">{doc.nom}</h2>
           <p className="document-info">Type: {doc.type}</p>
           <p className="document-info">Chemin d'accès: {doc.cheminAcces}</p>
-          <p className="document-info">ID de l'utilisateur: {doc.utilisateurId}</p>
-          <p className="document-info">ID du projet: {doc.projetId}</p>
+          <p className="document-info">Créateur: {doc.createurNom} {doc.createurPrenom}</p> {/* Ajout du nom et prénom du créateur */}
+      <p className="document-info">Projet: {doc.nomProjet}</p> {/* Ajout du nom du projet */}
+          {/* <p className="document-info">ID de l'utilisateur: {doc.utilisateurId}</p>
+          <p className="document-info">ID du projet: {doc.projetId}</p> */}
           <button onClick={() => supprimerDocument(doc.documentId)}>Supprimer</button>
           <Link to={`/UpdateDocumentForm/${doc.documentId}`} className="document-update-button">
             Modifier
