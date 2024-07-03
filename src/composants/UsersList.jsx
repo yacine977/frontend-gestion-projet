@@ -10,16 +10,30 @@ import {
 
 function UserList() {
   const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const userRole = localStorage.getItem("role");
 
   useEffect(() => {
     fetch("http://localhost:3000/utilisateur/getAllUsers")
       .then((response) => response.json())
-      .then((data) => setUsers(data))
+      .then((data) => {
+        setUsers(data);
+        setFilteredUsers(data); // Initialize filtered users with all users
+      })
       .catch((error) => {
         console.error("Erreur : ", error);
       });
   }, []);
+
+  const handleSearch = (event) => {
+    const searchTerm = event.target.value.toLowerCase();
+    setSearchTerm(searchTerm);
+    const filteredUsers = users.filter((user) =>
+      `${user.nom} ${user.prenom}`.toLowerCase().includes(searchTerm)
+    );
+    setFilteredUsers(filteredUsers);
+  };
 
   const getRole = async (utilisateurId) => {
     const response = await fetch(
@@ -154,18 +168,35 @@ const afficherEtChoisirProjet = async (projets) => {
   }
 }
 
+const searchBarStyles = {
+  marginBottom: '20px',
+  padding: '10px',
+  width: '100%',
+  fontSize: '16px',
+  border: '1px solid #ccc',
+  borderRadius: '5px',
+  outline: 'none',
+};
+
 // Mise à jour des références dans le composant React
 
   // Le corps du composant reste inchangé, sauf pour la mise à jour des noms de classe
   return (
     <div className="ul_userListContainer">
       <h1>Liste des utilisateurs</h1>
-      {users.map((user) => (
+      <input
+      type="text"
+      placeholder="Rechercher par nom ou par prenom..."
+      value={searchTerm}
+      onChange={handleSearch}
+      style={searchBarStyles}
+    />
+      {filteredUsers.map((user) => (
         <div className="ul_userCard" key={user.utilisateurId}>
-        <h2>{user.nom} {user.prenom}</h2>
-        <p>ID: {user.utilisateurId}</p>
-        <p>Email: {user.email}</p>
-        <p>Téléphone: {user.telephone}</p>
+          <h2>{user.nom} {user.prenom}</h2>
+          <p>ID: {user.utilisateurId}</p>
+          <p>Email: {user.email}</p>
+          <p>Téléphone: {user.telephone}</p>
         
           {userRole === "AdministrateurInfrastructure" && (
             <>
