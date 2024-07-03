@@ -66,8 +66,9 @@ function NotificationsUtilisateur() {
           <div key={notification.id} className={`notification ${notification.isNew ? 'new' : ''}`}>
             <p>{notification.message}</p>
             <p className="notification-date">
-              Date: {moment(notification.dateHeure).subtract(10, 'hours').add(1, 'day').locale('fr').format('LLLL')}
-            </p>
+  Date: {moment(notification.dateHeure).subtract(10, 'hours').locale('fr').format('LLLL')}
+</p>
+
             {notification.isNew && (
               <button 
                 onClick={() => markNotificationAsRead(notification.id)} 
